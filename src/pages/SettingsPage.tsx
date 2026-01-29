@@ -1,10 +1,17 @@
 import { Bell, Moon, Volume2, Shield, ChevronRight, Smartphone } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function SettingsPage() {
+  const navigate = useNavigate();
   return (
     <div className="p-6 md:p-8 max-w-2xl mx-auto">
-      <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight mb-8">Settings</h1>
+      <div className="flex items-center gap-3 mb-8">
+        <div className="h-10 w-10 bg-linear-to-br from-brand-600 to-brand-800 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-brand-500/20">
+          B
+        </div>
+        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Settings</h1>
+      </div>
 
       <div className="space-y-6">
         <Section title="Preferences">
@@ -14,8 +21,16 @@ export default function SettingsPage() {
         </Section>
 
         <Section title="Account">
-          <LinkRow icon={<Shield />} label="Privacy & Security" />
-          <LinkRow icon={<Smartphone />} label="Linked Devices" />
+          <LinkRow
+            icon={<Shield />}
+            label="Privacy & Security"
+            onClick={() => navigate('/settings/privacy')}
+          />
+          <LinkRow
+            icon={<Smartphone />}
+            label="Linked Devices"
+            onClick={() => navigate('/settings/devices')}
+          />
         </Section>
 
         <div className="pt-6">
@@ -78,9 +93,12 @@ function ToggleRow({
   );
 }
 
-function LinkRow({ icon, label }: { icon: any; label: string }) {
+function LinkRow({ icon, label, onClick }: { icon: any; label: string; onClick?: () => void }) {
   return (
-    <button className="w-full p-4 flex items-center justify-between border-b border-slate-50 last:border-0 hover:bg-slate-50 transition-colors text-left">
+    <button
+      onClick={onClick}
+      className="w-full p-4 flex items-center justify-between border-b border-slate-50 last:border-0 hover:bg-slate-50 transition-colors text-left"
+    >
       <div className="flex items-center gap-4">
         <div className="text-slate-400">{icon}</div>
         <div className="font-bold text-slate-900">{label}</div>

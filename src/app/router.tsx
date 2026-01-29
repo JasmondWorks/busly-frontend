@@ -73,10 +73,31 @@ export const router = createBrowserRouter([
         },
       },
       {
+        path: 'notifications',
+        async lazy() {
+          const { default: NotificationsPage } = await import('@/pages/NotificationsPage');
+          return { Component: NotificationsPage };
+        },
+      },
+      {
         path: 'settings',
         async lazy() {
           const { default: SettingsPage } = await import('@/pages/SettingsPage');
           return { Component: SettingsPage };
+        },
+      },
+      {
+        path: 'settings/privacy',
+        async lazy() {
+          const { default: PrivacySecurityPage } = await import('@/pages/PrivacySecurityPage');
+          return { Component: PrivacySecurityPage };
+        },
+      },
+      {
+        path: 'settings/devices',
+        async lazy() {
+          const { default: LinkedDevicesPage } = await import('@/pages/LinkedDevicesPage');
+          return { Component: LinkedDevicesPage };
         },
       },
       {
@@ -85,6 +106,27 @@ export const router = createBrowserRouter([
           const { default: ContributionHubPage } =
             await import('@/features/contribution/pages/ContributionHubPage');
           return { Component: ContributionHubPage };
+        },
+      },
+      {
+        path: 'contribute/add-stop',
+        async lazy() {
+          const { default: AddStopPage } = await import('@/pages/AddStopPage');
+          return { Component: AddStopPage };
+        },
+      },
+      {
+        path: 'contribute/validate',
+        async lazy() {
+          const { default: ValidationPage } = await import('@/pages/ValidationPage');
+          return { Component: ValidationPage };
+        },
+      },
+      {
+        path: 'contribute/landmark',
+        async lazy() {
+          const { default: LandmarkPage } = await import('@/pages/LandmarkPage');
+          return { Component: LandmarkPage };
         },
       },
       // Keeping the old monolithic one for reference or fallback
@@ -109,6 +151,20 @@ export const router = createBrowserRouter([
           const { default: DriverDashboardPage } =
             await import('@/pages/driver/DriverDashboardPage');
           return { Component: DriverDashboardPage };
+        },
+      },
+      {
+        path: 'calendar',
+        async lazy() {
+          const { default: DriverCalendarPage } = await import('@/pages/driver/CalendarPage');
+          return { Component: DriverCalendarPage };
+        },
+      },
+      {
+        path: 'notifications',
+        async lazy() {
+          const { default: NotificationsPage } = await import('@/pages/NotificationsPage');
+          return { Component: NotificationsPage };
         },
       },
       {

@@ -20,7 +20,36 @@ interface Stop {
   landmarks?: Landmark[];
 }
 
-function TimelineItem({ stop, isLast }: { stop: Stop; isLast: boolean }) {
+export function NavigationTimeline({
+  stops,
+  onStopClick,
+}: {
+  stops: Stop[];
+  onStopClick?: (stopId: string) => void;
+}) {
+  return (
+    <div className="px-6 py-4">
+      {stops.map((stop, index) => (
+        <TimelineItem
+          key={stop.id}
+          stop={stop}
+          isLast={index === stops.length - 1}
+          onClick={() => onStopClick?.(stop.id)}
+        />
+      ))}
+    </div>
+  );
+}
+
+function TimelineItem({
+  stop,
+  isLast,
+  onClick,
+}: {
+  stop: Stop;
+  isLast: boolean;
+  onClick?: () => void;
+}) {
   const isCurrent = stop.status === 'current';
   const isPast = stop.status === 'past';
 
@@ -35,9 +64,11 @@ function TimelineItem({ stop, isLast }: { stop: Stop; isLast: boolean }) {
       </div>
 
       <div className="flex-1 pb-8">
-        <div className="flex justify-between items-start">
+        <div className="flex justify-between items-start cursor-pointer group" onClick={onClick}>
           <div>
-            <h3 className={`font-bold text-lg ${isCurrent ? 'text-gray-900' : 'text-gray-500'}`}>
+            <h3
+              className={`font-bold text-lg group-hover:text-brand-600 transition-colors ${isCurrent ? 'text-gray-900' : 'text-gray-500'}`}
+            >
               {stop.name}
             </h3>
             <span
@@ -52,16 +83,6 @@ function TimelineItem({ stop, isLast }: { stop: Stop; isLast: boolean }) {
           <LandmarkCard landmarks={stop.landmarks} stopName={stop.name} />
         )}
       </div>
-    </div>
-  );
-}
-
-export function NavigationTimeline({ stops }: { stops: Stop[] }) {
-  return (
-    <div className="px-6 py-4">
-      {stops.map((stop, index) => (
-        <TimelineItem key={stop.id} stop={stop} isLast={index === stops.length - 1} />
-      ))}
     </div>
   );
 }

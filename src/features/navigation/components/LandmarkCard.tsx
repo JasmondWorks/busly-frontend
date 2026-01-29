@@ -187,17 +187,17 @@ export function LandmarkCard({ landmarks, stopName }: LandmarkCardProps) {
         </motion.div>
 
         {/* ACTIONS */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="flex flex-wrap gap-3">
           <button
             onClick={() => setStatus('confirmed')}
-            className="py-3 bg-brand-600 text-white font-bold rounded-xl hover:bg-brand-700 active:scale-95 transition-all text-sm flex items-center justify-center gap-2"
+            className="flex-1 min-w-[140px] py-3 bg-brand-600 text-white font-bold rounded-xl hover:bg-brand-700 active:scale-95 transition-all text-sm flex items-center justify-center gap-2 whitespace-nowrap"
           >
             <CheckCircle2 size={18} />
             Yes, I see it
           </button>
           <button
             onClick={() => setStatus('missed')}
-            className="py-3 bg-white border border-gray-200 text-gray-500 font-bold rounded-xl hover:bg-gray-50 active:scale-95 transition-all text-sm"
+            className="flex-1 min-w-[120px] py-3 bg-white border border-gray-200 text-gray-500 font-bold rounded-xl hover:bg-gray-50 active:scale-95 transition-all text-sm whitespace-nowrap"
           >
             Missed it?
           </button>

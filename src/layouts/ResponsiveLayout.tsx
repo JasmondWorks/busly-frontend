@@ -28,7 +28,7 @@ export default function ResponsiveLayout() {
           <NavItem to="/profile" icon={<User size={20} />} label="Profile" />
         </nav>
 
-        <div className="p-4 border-t border-gray-100 m-4">
+        <div className="px-4 border-t border-gray-100 mt-auto pt-4 mb-8">
           <NavItem to="/settings" icon={<Settings size={20} />} label="Settings" />
         </div>
       </aside>

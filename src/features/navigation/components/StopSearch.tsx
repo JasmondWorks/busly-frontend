@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { MapPin, ArrowRight, Navigation } from 'lucide-react';
 import { navigationApi } from '../services/navigation.api';
 import type { Stop } from '../types';
@@ -81,9 +81,9 @@ const StopPicker = ({
             role="combobox"
             aria-expanded={open}
             className={cn(
-              'w-full justify-start text-left font-normal border-gray-300 hover:bg-gray-50 bg-white h-12 px-3',
-              !selected && 'text-muted-foreground',
-              open && 'border-brand-600 ring-2 ring-brand-100',
+              'w-full justify-start text-left font-bold border-gray-100 hover:bg-gray-50 bg-white h-14 px-5 rounded-2xl shadow-sm transition-all',
+              !selected && 'text-gray-400',
+              open && 'border-brand-600 ring-4 ring-brand-100 bg-white',
             )}
           >
             <div className="mr-3 text-gray-400 shrink-0">{icon}</div>
@@ -173,55 +173,68 @@ export const StopSearch = ({ onRouteSelected }: StopSearchProps) => {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-8 w-full max-w-lg mx-auto">
-      <h2 className="text-xl font-semibold mb-8 text-gray-900 tracking-tight">Plan your journey</h2>
+    <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-xl shadow-brand-900/5 p-8 md:p-10 w-full relative overflow-hidden">
+      {/* Decorative Blobs */}
+      <div className="absolute -top-24 -right-24 w-48 h-48 bg-brand-50 rounded-full blur-3xl opacity-50 z-0"></div>
+      <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-blue-50 rounded-full blur-3xl opacity-50 z-0"></div>
 
-      <div className="relative">
-        {/* Connector Line */}
-        <div className="absolute left-[20px] top-[45px] bottom-[45px] w-px bg-gray-200 hidden sm:block z-0"></div>
-
-        <div className="relative z-10">
-          <StopPicker
-            label="Origin"
-            selected={selectedOrigin}
-            onSelect={setSelectedOrigin}
-            results={originResults}
-            onSearch={(val) => handleSearch(val, setOriginResults)}
-            open={originOpen}
-            setOpen={setOriginOpen}
-            placeholder="Search origin stop..."
-            icon={
-              <div className="w-2.5 h-2.5 rounded-full border-2 border-gray-400 bg-white"></div>
-            }
-            enableCurrentLocation={true}
-          />
-
-          <StopPicker
-            label="Destination"
-            selected={selectedDest}
-            onSelect={setSelectedDest}
-            results={destResults}
-            onSearch={(val) => handleSearch(val, setDestResults)}
-            open={destOpen}
-            setOpen={setDestOpen}
-            placeholder="Search destination stop..."
-            icon={<MapPin size={16} className="text-brand-600" />}
-          />
+      <div className="relative z-10">
+        <div className="flex items-center gap-3 mb-1">
+          <div className="w-10 h-1 rounded-full bg-brand-600"></div>
+          <h2 className="text-2xl font-black text-gray-900 tracking-tight">Plan your journey</h2>
         </div>
-      </div>
+        <p className="text-gray-400 text-sm font-medium mb-10 pl-[52px]">
+          Select your start and end stops.
+        </p>
 
-      <button
-        disabled={!selectedOrigin || !selectedDest}
-        onClick={handleFindRoute}
-        className={cn(
-          'w-full py-2.5 px-4 rounded-md font-medium text-sm transition-all duration-200 flex items-center justify-center gap-2 mt-2',
-          selectedOrigin && selectedDest
-            ? 'bg-brand-600 text-white hover:bg-brand-500 shadow-sm'
-            : 'bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200',
-        )}
-      >
-        Find Route <ArrowRight size={16} />
-      </button>
+        <div className="relative">
+          {/* Connector Line */}
+          <div className="absolute left-[20px] top-[45px] bottom-[45px] w-px bg-gray-200 hidden sm:block z-0"></div>
+
+          <div className="relative z-10">
+            <StopPicker
+              label="Origin"
+              selected={selectedOrigin}
+              onSelect={setSelectedOrigin}
+              results={originResults}
+              onSearch={(val) => handleSearch(val, setOriginResults)}
+              open={originOpen}
+              setOpen={setOriginOpen}
+              placeholder="Search origin stop..."
+              icon={
+                <div className="w-2.5 h-2.5 rounded-full border-2 border-gray-400 bg-white"></div>
+              }
+              enableCurrentLocation={true}
+            />
+
+            <StopPicker
+              label="Destination"
+              selected={selectedDest}
+              onSelect={setSelectedDest}
+              results={destResults}
+              onSearch={(val) => handleSearch(val, setDestResults)}
+              open={destOpen}
+              setOpen={setDestOpen}
+              placeholder="Search destination stop..."
+              icon={<MapPin size={16} className="text-brand-600" />}
+            />
+          </div>
+        </div>
+
+        <button
+          disabled={!selectedOrigin || !selectedDest}
+          onClick={handleFindRoute}
+          className={cn(
+            'w-full py-4.5 px-6 rounded-2xl font-black text-base transition-all duration-300 flex items-center justify-center gap-3 mt-4 group shadow-xl',
+            selectedOrigin && selectedDest
+              ? 'bg-brand-600 text-white hover:bg-brand-700 hover:scale-[1.02] active:scale-95 shadow-brand-600/20'
+              : 'bg-gray-50 text-gray-300 cursor-not-allowed border border-gray-100 shadow-none',
+          )}
+        >
+          <span>Find optimal route</span>
+          <ArrowRight size={20} className="transition-transform group-hover:translate-x-1.5" />
+        </button>
+      </div>
     </div>
   );
 };

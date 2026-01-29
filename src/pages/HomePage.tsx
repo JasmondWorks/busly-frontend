@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, MapPin, Clock, ChevronRight, Bus } from 'lucide-react';
+import { Search, MapPin, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import { RECENT_ROUTES } from '@/shared/constants/routes';
@@ -17,8 +17,7 @@ export default function HomePage() {
     // Use browser geolocation
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
+        () => {
           // In a real app, reverse geocode here or pass coords
           // For this demo, we assume "Current Location"
           navigate(`/routes?origin=Current Location&dest=${encodeURIComponent(destination)}`);
@@ -50,10 +49,16 @@ export default function HomePage() {
       <div className="max-w-7xl mx-auto space-y-24 relative z-10">
         {/* HERO SECTION */}
         <section className="relative text-center max-w-4xl mx-auto pb-4 md:pb-8">
+          <div className="flex justify-center mb-8">
+            <div className="h-12 w-12 bg-linear-to-br from-brand-600 to-brand-800 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-xl shadow-brand-500/20">
+              B
+            </div>
+          </div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            onClick={() => navigate('/onboarding/location')}
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-gray-200/60 shadow-sm text-gray-600 text-[10px] md:text-xs font-bold uppercase tracking-widest mb-6 md:mb-10 hover:shadow-md hover:border-brand-200 transition-all cursor-pointer"
           >
             <span className="relative flex h-2 w-2">
@@ -136,7 +141,10 @@ export default function HomePage() {
           <section className="lg:col-span-7">
             <div className="flex items-center justify-between mb-8 px-2">
               <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Recent Routes</h2>
-              <button className="text-sm font-bold text-gray-400 hover:text-brand-600 transition-colors">
+              <button
+                onClick={() => navigate('/routes')}
+                className="text-sm font-bold text-gray-400 hover:text-brand-600 transition-colors"
+              >
                 View all
               </button>
             </div>
@@ -177,7 +185,10 @@ export default function HomePage() {
           <section className="lg:col-span-5">
             <div className="flex items-center justify-between mb-8 px-2">
               <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Nearest Stop</h2>
-              <button className="text-sm font-bold text-gray-400 hover:text-brand-600 transition-colors">
+              <button
+                onClick={() => navigate('/navigation/obalende')}
+                className="text-sm font-bold text-gray-400 hover:text-brand-600 transition-colors"
+              >
                 Map view
               </button>
             </div>
@@ -235,7 +246,13 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="w-full py-5 bg-gray-900 text-white font-bold rounded-2xl hover:bg-brand-600 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center shadow-lg">
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate('/navigation/active');
+                  }}
+                  className="w-full py-5 bg-gray-900 text-white font-bold rounded-2xl hover:bg-brand-600 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center shadow-lg"
+                >
                   Navigate to Stop <ChevronRight className="w-5 h-5 ml-2" />
                 </div>
               </div>

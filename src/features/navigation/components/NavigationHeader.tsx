@@ -1,12 +1,18 @@
-import { Bell, MoreVertical } from 'lucide-react';
+import { Bell, MoreVertical, Map as MapIcon } from 'lucide-react';
 
 interface NavigationHeaderProps {
   nextStop: string;
   arrivalTime: string;
   isAlighting?: boolean;
+  onMapClick?: () => void;
 }
 
-export function NavigationHeader({ nextStop, arrivalTime, isAlighting }: NavigationHeaderProps) {
+export function NavigationHeader({
+  nextStop,
+  arrivalTime,
+  isAlighting,
+  onMapClick,
+}: NavigationHeaderProps) {
   return (
     <header
       className={`relative overflow-hidden ${isAlighting ? 'bg-orange-500' : 'bg-brand-600'} text-white p-4 md:p-6 shadow-xl shadow-brand-900/10 transition-colors duration-500 rounded-b-[2rem] md:rounded-b-none shrink-0 z-20`}
@@ -29,6 +35,15 @@ export function NavigationHeader({ nextStop, arrivalTime, isAlighting }: Navigat
             </h1>
           </div>
           <div className="flex gap-2">
+            {onMapClick && (
+              <button
+                onClick={onMapClick}
+                className="p-2 md:p-2.5 bg-white/10 rounded-full hover:bg-white/20 transition-colors backdrop-blur-sm"
+                aria-label="View Map"
+              >
+                <MapIcon size={18} />
+              </button>
+            )}
             <button className="p-2 md:p-2.5 bg-white/10 rounded-full hover:bg-white/20 transition-colors backdrop-blur-sm">
               <Bell size={18} />
             </button>

@@ -54,16 +54,16 @@ export function NavigationMap({ stops, currentStopIndex }: NavigationMapProps) {
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
       {/* SVG Layer */}
-      <svg className="w-full h-full" viewBox="0 0 800 600">
+      <svg className="w-full h-full" viewBox="40 40 620 480" preserveAspectRatio="xMidYMid meet">
         {/* 1. Future Route Path (Dashed) */}
         <path
           d={futurePathD}
           fill="none"
           stroke="#cbd5e1"
-          strokeWidth="8"
+          strokeWidth="12"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeDasharray="12 12"
+          strokeDasharray="16 16"
         />
 
         {/* 2. Active Route Path (Solid) */}
@@ -71,7 +71,7 @@ export function NavigationMap({ stops, currentStopIndex }: NavigationMapProps) {
           d={activePathD}
           fill="none"
           stroke="#6366f1"
-          strokeWidth="8"
+          strokeWidth="12"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
@@ -86,10 +86,10 @@ export function NavigationMap({ stops, currentStopIndex }: NavigationMapProps) {
             <g key={stop.id} transform={`translate(${point.x}, ${point.y})`}>
               {/* Stop Circle */}
               <circle
-                r={isCurrent ? 8 : 6}
+                r={isCurrent ? 12 : 8}
                 fill={isPast ? '#6366f1' : isCurrent ? '#ffffff' : '#fff'}
                 stroke={isPast ? '#6366f1' : isCurrent ? '#6366f1' : '#94a3b8'}
-                strokeWidth={isCurrent ? 6 : 4}
+                strokeWidth={isCurrent ? 8 : 6}
               />
             </g>
           );

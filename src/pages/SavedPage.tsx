@@ -14,27 +14,29 @@ export default function SavedPage() {
     { id: 's1', name: 'Obalende Underbridge', location: 'Lagos Island' },
     { id: 's2', name: 'Anthony Bus Stop', location: 'Ikorodu Road' },
   ];
-
   return (
     <div className="p-6 md:p-8 space-y-8 relative overflow-hidden">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-brand-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
-      <div className="flex items-center justify-between relative z-10">
+      <header className="flex items-center gap-4 relative z-10">
+        <div className="h-10 w-10 bg-linear-to-br from-brand-600 to-brand-800 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-brand-500/20">
+          B
+        </div>
         <div>
           <h1 className="text-4xl font-black text-slate-900 tracking-tighter mb-2">Saved</h1>
           <p className="text-slate-500 font-medium max-w-sm">
             Your personal collection of routes and favorite stops.
           </p>
         </div>
-      </div>
+      </header>
 
       {/* Saved Routes */}
       <section className="relative z-10">
         <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2">
           <span className="w-8 h-px bg-slate-200"></span> Routes
         </h2>
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid lg:grid-cols-2 gap-5">
           {savedRoutes.map((route) => (
             <motion.div
               key={route.id}
@@ -42,8 +44,6 @@ export default function SavedPage() {
               className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm cursor-pointer hover:border-brand-200 hover:shadow-xl hover:shadow-brand-900/5 transition-all group relative overflow-hidden"
               onClick={() => navigate('/navigation/active')}
             >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-brand-50 rounded-bl-[2rem] -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
-
               <div className="flex justify-between items-start mb-6 relative z-10">
                 <div className="w-12 h-12 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center shadow-inner">
                   <Bookmark size={22} className="fill-brand-600/20" />
@@ -74,7 +74,7 @@ export default function SavedPage() {
         <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2">
           <span className="w-8 h-px bg-slate-200"></span> Frequent Stops
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {savedStops.map((stop) => (
             <div
               key={stop.id}

@@ -4,13 +4,15 @@ import {
   ArrowLeft,
   Bus,
   ChevronsRight,
-  Map,
+  Map as MapIcon,
   ArrowRightLeft,
   Users,
   ShieldCheck,
   Zap,
+  ChevronRight,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { NavigationMap } from '@/features/navigation/components/NavigationMap';
 
 export default function StopDecisionPage() {
   const navigate = useNavigate();
@@ -19,16 +21,28 @@ export default function StopDecisionPage() {
 
   // Mock Context
   const currentStop = {
-    name: stopId ? stopId.charAt(0).toUpperCase() + stopId.slice(1) : 'Obalende Underbridge',
+    name: stopId
+      ? stopId.charAt(0).toUpperCase() + stopId.slice(1).replace('-', ' ')
+      : 'Obalende Underbridge',
     // Swapped to a reliable city transit image
     image:
       'https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?q=80&w=1200&auto=format&fit=crop',
   };
 
+  const destination = 'Onipanu';
+
+  const mockStops = [
+    { id: '1', name: 'Idi-Iroko', status: 'past' },
+    { id: '2', name: 'Anthony', status: 'past' },
+    { id: '3', name: currentStop.name, status: 'current' },
+    { id: '4', name: 'Maryland (Alt)', status: 'future' },
+    { id: '5', name: destination, status: 'future' },
+  ] as any[];
+
   const alternateRoutes = [
     {
       id: 'r1',
-      destination: 'Lekki Phase 1',
+      destination: destination,
       time: '25 mins',
       stops: 4,
       transfers: 0,
@@ -62,6 +76,7 @@ export default function StopDecisionPage() {
   ];
 
   const handleRouteSwitch = (routeId: string) => {
+    console.log('Switching to route:', routeId);
     navigate('/navigation/active');
   };
 
@@ -71,7 +86,7 @@ export default function StopDecisionPage() {
       <div className="fixed top-0 left-0 w-full h-[500px] bg-gradient-to-b from-brand-900/5 to-transparent pointer-events-none"></div>
 
       {/* Header Image Area */}
-      <div className="relative h-72 w-full shrink-0">
+      <div className="relative h-64 md:h-72 w-full shrink-0">
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 z-10"></div>
         <img
           src={currentStop.image}
@@ -79,36 +94,47 @@ export default function StopDecisionPage() {
           className="w-full h-full object-cover"
         />
 
-        {/* Nav Bar */}
-        <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-start z-20">
-          <button
-            onClick={() => navigate(-1)}
-            className="w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all active:scale-95"
-          >
-            <ArrowLeft size={24} />
-          </button>
-          <div className="px-4 py-2 bg-white/90 backdrop-blur-md rounded-full flex items-center gap-2 shadow-lg shadow-black/10">
-            <div className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        {/* Nav Bar & Breadcrumbs */}
+        <div className="absolute top-0 left-0 right-0 p-6 flex flex-col gap-4 z-20">
+          <div className="flex justify-between items-start">
+            <button
+              onClick={() => navigate(-1)}
+              className="w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all active:scale-95"
+            >
+              <ArrowLeft size={24} />
+            </button>
+            <div className="px-4 py-2 bg-white/90 backdrop-blur-md rounded-full flex items-center gap-2 shadow-lg shadow-black/10">
+              <div className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              </div>
+              <span className="text-xs font-bold text-gray-900 uppercase tracking-widest">
+                Branch Point
+              </span>
             </div>
-            <span className="text-xs font-bold text-gray-900 uppercase tracking-widest">
-              Live Decision
-            </span>
+          </div>
+
+          {/* Breadcrumb setting */}
+          <div className="flex items-center gap-2 text-white/70 text-[10px] font-bold uppercase tracking-widest bg-black/20 backdrop-blur-sm self-start px-3 py-1.5 rounded-full border border-white/10">
+            <span>Current Journey</span>
+            <ChevronRight size={10} />
+            <span className="text-white">{currentStop.name}</span>
+            <ChevronRight size={10} />
+            <span>To {destination}</span>
           </div>
         </div>
 
         {/* Stop Title Overlay */}
-        <div className="absolute bottom-0 left-0 w-full p-8 pb-16 z-20 text-center">
+        <div className="absolute bottom-0 left-0 w-full p-8 pb-12 z-20">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <div className="inline-block px-3 py-1 rounded-full border border-white/30 bg-black/20 backdrop-blur-sm text-white/90 text-[10px] font-bold uppercase tracking-[0.2em] mb-3">
-              You are at
+            <div className="inline-block px-3 py-1 rounded-full border border-white/30 bg-black/20 backdrop-blur-sm text-white/90 text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
+              Branching from
             </div>
-            <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight drop-shadow-lg">
+            <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight drop-shadow-lg">
               {currentStop.name}
             </h1>
           </motion.div>
@@ -122,9 +148,26 @@ export default function StopDecisionPage() {
           <div className="w-12 h-1.5 rounded-full bg-gray-300"></div>
         </div>
 
-        <div className="px-8 pt-2 pb-6 text-center">
-          <p className="text-gray-400 font-medium text-sm">
-            Tap a route below to view details & compare.
+        {/* Mini Map Preview of Branching Routes */}
+        <div className="px-6 mb-6">
+          <div className="h-40 bg-gray-50 rounded-3xl border border-gray-100 overflow-hidden relative group">
+            <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[16px_16px] opacity-30 z-0"></div>
+            <div className="relative z-10 w-full h-full scale-[0.8] opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all">
+              <NavigationMap stops={mockStops} currentStopIndex={2} />
+            </div>
+            <div className="absolute bottom-3 left-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-gray-100 flex items-center justify-between shadow-sm z-20">
+              <span className="text-[10px] font-black uppercase tracking-wider text-gray-500">
+                Live Branch Preview
+              </span>
+              <MapIcon size={12} className="text-brand-600" />
+            </div>
+          </div>
+        </div>
+
+        <div className="px-8 pt-0 pb-6">
+          <h2 className="text-xl font-black text-gray-900 mb-1">Branching Routes</h2>
+          <p className="text-gray-400 font-medium text-xs">
+            Show alternative routes from {currentStop.name} that still lead to {destination}.
           </p>
         </div>
 
@@ -186,7 +229,7 @@ export default function StopDecisionPage() {
                     <div className="grid grid-cols-3 gap-3 mb-6">
                       <div className="bg-gray-50/50 p-3 rounded-2xl text-center border border-gray-100">
                         <div className="text-gray-400 mb-1 flex justify-center">
-                          <Map size={18} />
+                          <MapIcon size={18} />
                         </div>
                         <div className="text-xl font-black text-gray-900">{route.stops}</div>
                         <div className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">

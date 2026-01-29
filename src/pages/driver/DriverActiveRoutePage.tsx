@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Navigation, AlertTriangle, Flag, Map as MapIcon } from 'lucide-react';
 import { ALL_ROUTES } from '@/shared/constants/routes';
-import { ROUTE_WAYPOINTS, type RouteWaypoint } from '@/shared/constants/landmarks';
+import { ROUTE_WAYPOINTS } from '@/shared/constants/landmarks';
 
 export default function DriverActiveRoutePage() {
   const navigate = useNavigate();
@@ -19,8 +19,7 @@ export default function DriverActiveRoutePage() {
   const [currentWaypointIndex, setCurrentWaypointIndex] = useState(0);
   const [distanceToNext, setDistanceToNext] = useState(0.8); // km
   const [showEndModal, setShowEndModal] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isSimulated, setIsSimulated] = useState(true);
+  const isSimulated = true;
 
   // Derived
   const currentWaypoint = waypoints[currentWaypointIndex];
@@ -80,7 +79,7 @@ export default function DriverActiveRoutePage() {
       className={`h-screen w-full flex flex-col md:flex-row overflow-hidden font-sans transition-colors duration-500 ${isOverspeeding ? 'bg-red-600' : 'bg-slate-950'} text-white`}
     >
       {/* LEFT PANEL: Driving Instruments (Mobile: Top) */}
-      <div className="flex-1 flex flex-col relative p-4 md:p-8">
+      <div className="h-[28vh] md:h-screen md:flex-1 flex flex-col relative p-4 md:p-8 shrink-0">
         {/* Header */}
         <header className="flex justify-between items-center mb-8">
           <div className="flex flex-col">
@@ -110,18 +109,18 @@ export default function DriverActiveRoutePage() {
             </span>
             <div className="flex items-baseline justify-center gap-2">
               <span
-                className={`text-[8rem] md:text-[10rem] font-black leading-none tracking-tighter tabular-nums ${isOverspeeding ? 'animate-pulse text-white' : 'text-white'}`}
+                className={`text-[5rem] md:text-[10rem] font-black leading-none tracking-tighter tabular-nums ${isOverspeeding ? 'animate-pulse text-white' : 'text-white'}`}
               >
                 {Math.max(0, Math.floor(speed))}
               </span>
-              <span className="text-xl md:text-2xl font-bold text-slate-500">km/h</span>
+              <span className="text-lg md:text-2xl font-bold text-slate-500">km/h</span>
             </div>
           </div>
 
           {/* Animated Ring (Decoration) */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
             <div
-              className={`w-64 h-64 md:w-96 md:h-96 rounded-full border-[20px] ${isOverspeeding ? 'border-white animate-ping' : 'border-slate-800'}`}
+              className={`w-64 h-64 md:w-96 md:h-96 rounded-full border-20 ${isOverspeeding ? 'border-white animate-ping' : 'border-slate-800'}`}
             ></div>
           </div>
         </div>
@@ -133,9 +132,9 @@ export default function DriverActiveRoutePage() {
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 50, opacity: 0 }}
-              className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-white text-red-600 px-8 py-4 rounded-full font-black text-xl flex items-center gap-3 shadow-2xl animate-bounce z-20 whitespace-nowrap"
+              className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 bg-white text-red-600 px-6 py-3 md:px-8 md:py-4 rounded-full font-black text-lg md:text-xl flex items-center gap-3 shadow-2xl animate-bounce z-20 whitespace-nowrap"
             >
-              <AlertTriangle fill="currentColor" size={28} /> SLOW DOWN
+              <AlertTriangle fill="currentColor" size={24} /> SLOW DOWN
             </motion.div>
           )}
         </AnimatePresence>
@@ -153,7 +152,7 @@ export default function DriverActiveRoutePage() {
         </div>
 
         {/* Current Instruction Card (Prominent) */}
-        <div className="p-6 border-b border-slate-800 bg-slate-800/30">
+        <div className="p-4 md:p-6 border-b border-slate-800 bg-slate-800/30">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-2 rounded-full bg-brand-500/20 text-brand-400">
               <Navigation size={24} fill="currentColor" />
@@ -161,26 +160,26 @@ export default function DriverActiveRoutePage() {
             <span className="text-brand-400 font-bold uppercase tracking-wider text-sm">
               Next Action
             </span>
-            <span className="ml-auto text-white font-mono font-bold">
+            <span className="ml-auto text-white font-mono font-bold text-xs md:text-base">
               {distanceToNext.toFixed(2)} km
             </span>
           </div>
 
-          <h2 className="text-3xl font-bold text-white leading-tight mb-2">
+          <h2 className="text-xl md:text-3xl font-bold text-white leading-tight mb-2">
             {currentWaypoint?.detail || currentWaypoint?.label}
           </h2>
 
           {/* Visual Cue / Landmark Image */}
           {currentWaypoint?.imageUrl && (
-            <div className="mt-4 rounded-xl overflow-hidden border border-slate-700 relative aspect-video group">
+            <div className="mt-3 rounded-xl overflow-hidden border border-slate-700 relative aspect-16/6 md:aspect-video group">
               <img
                 src={currentWaypoint.imageUrl}
                 alt="Landmark"
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
               />
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                <span className="text-white font-bold flex items-center gap-2">
-                  <MapIcon size={16} /> Look for: {currentWaypoint.label}
+              <div className="absolute bottom-0 inset-x-0 bg-linear-to-t from-black/80 to-transparent p-3 md:p-4">
+                <span className="text-white font-bold flex items-center gap-2 text-xs md:text-base">
+                  <MapIcon size={14} /> Look for: {currentWaypoint.label}
                 </span>
               </div>
             </div>
