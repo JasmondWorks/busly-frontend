@@ -1,10 +1,10 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, type ReactNode } from 'react';
 
 interface User {
   id: string;
   name: string;
   email: string;
-  role: 'commuter' | 'admin' | 'contributor';
+  role: 'commuter' | 'admin' | 'contributor' | 'driver';
   avatar?: string;
 }
 
@@ -12,6 +12,7 @@ interface AuthContextType {
   user: User | null;
   login: () => void;
   logout: () => void;
+  toggleRole: () => void;
   isAuthenticated: boolean;
 }
 
@@ -41,8 +42,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   };
 
+  const toggleRole = () => {
+    setUser((prev) => {
+      if (!prev) return null;
+      const nextRole = prev.role === 'commuter' ? 'driver' : 'commuter';
+      return { ...prev, role: nextRole };
+    });
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated: !!user }}>
+    <AuthContext.Provider value={{ user, login, logout, toggleRole, isAuthenticated: !!user }}>
       {children}
     </AuthContext.Provider>
   );

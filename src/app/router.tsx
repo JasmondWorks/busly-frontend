@@ -120,6 +120,14 @@ export const router = createBrowserRouter([
         },
       },
       {
+        path: 'learning/:routeId',
+        async lazy() {
+          const { default: DriverRouteLearningPage } =
+            await import('@/pages/driver/DriverRouteLearningPage');
+          return { Component: DriverRouteLearningPage };
+        },
+      },
+      {
         path: 'vehicle-check',
         element: (
           <div className="p-10 font-bold text-2xl text-center">

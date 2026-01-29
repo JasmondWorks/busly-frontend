@@ -1,6 +1,10 @@
 import { User, Award, Map, TrendingUp } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/shared/context/AuthContext';
 
 export default function ProfilePage() {
+  const navigate = useNavigate();
+  const auth = useAuth();
   const user = {
     name: 'Jasmond',
     email: 'jasmond@busly.app',
@@ -25,9 +29,29 @@ export default function ProfilePage() {
           </div>
           <h1 className="text-3xl font-black tracking-tight mb-1">{user.name}</h1>
           <p className="text-slate-400 font-medium text-sm mb-6">{user.email}</p>
-          <div className="px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/10 text-brand-300 text-xs font-bold uppercase tracking-widest rounded-full">
-            {user.level}
+          <div className="px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/10 text-brand-300 text-xs font-bold uppercase tracking-widest rounded-full mb-4">
+            {user.level} {auth.user?.role === 'driver' && '(Driver Mode)'}
           </div>
+
+          <button
+            onClick={() => {
+              // Current role before toggle (React state is async)
+              const isCurrentlyDriver = auth.user?.role === 'driver';
+
+              auth.toggleRole();
+
+              if (isCurrentlyDriver) {
+                // Was driver -> becoming commuter
+                navigate('/');
+              } else {
+                // Was commuter -> becoming driver
+                navigate('/driver');
+              }
+            }}
+            className="px-6 py-2 bg-white text-slate-900 rounded-full text-sm font-bold shadow-lg hover:bg-gray-100 transition-colors"
+          >
+            Switch to {auth.user?.role === 'driver' ? 'Commuter' : 'Driver'} View
+          </button>
         </div>
       </div>
 

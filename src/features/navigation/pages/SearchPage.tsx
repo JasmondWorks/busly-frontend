@@ -3,6 +3,10 @@ import { StopSearch } from '../components/StopSearch';
 import type { Stop } from '../types';
 import { Clock, MapPin, TrendingUp } from 'lucide-react';
 
+import victoriaIslandImg from '@/assets/images/victoria-island.png';
+import ikejaMallImg from '@/assets/images/ikeja-city-mall.png';
+import unilagImg from '@/assets/images/unilag.png';
+
 export const SearchPage = () => {
   const navigate = useNavigate();
 
@@ -19,20 +23,17 @@ export const SearchPage = () => {
     {
       name: 'Victoria Island',
       description: 'Business District',
-      image:
-        'https://images.unsplash.com/photo-1550966871-3ed3c47e2ce2?q=80&w=600&auto=format&fit=crop',
+      image: victoriaIslandImg,
     },
     {
       name: 'Ikeja City Mall',
       description: 'Shopping & Leisure',
-      image:
-        'https://images.unsplash.com/photo-1595053915747-0e625515c026?q=80&w=600&auto=format&fit=crop',
+      image: ikejaMallImg,
     },
     {
       name: 'Unilag, Akoka',
       description: 'Education',
-      image:
-        'https://images.unsplash.com/photo-1592323363827-b50a41768407?q=80&w=600&auto=format&fit=crop',
+      image: unilagImg,
     },
   ];
 

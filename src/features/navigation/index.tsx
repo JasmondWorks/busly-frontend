@@ -5,4 +5,3 @@ export * from './components/GraphView';
 export * from './pages/SearchPage';
 export * from './pages/RouteSelectionPage';
 export * from './pages/NavigationPage';
-export { NavigationFeature } from './NavigationFeature';
