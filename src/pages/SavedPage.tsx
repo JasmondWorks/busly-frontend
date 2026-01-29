@@ -74,7 +74,7 @@ export default function SavedPage() {
         <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2">
           <span className="w-8 h-px bg-slate-200"></span> Frequent Stops
         </h2>
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {savedStops.map((stop) => (
             <div
               key={stop.id}

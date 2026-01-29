@@ -68,7 +68,7 @@ export default function RoutesPage() {
         </div>
 
         {/* Routes Grid */}
-        <div className="grid gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredRoutes.length === 0 ? (
             <div className="text-center py-20 bg-gray-50 rounded-3xl border border-dashed border-gray-200">
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-300">
