@@ -44,33 +44,83 @@ export const SearchPage = () => {
   ];
 
   return (
-    <div className="h-full w-full overflow-y-auto bg-gray-50/30 relative">
+    <div className="h-full w-full overflow-y-auto bg-gray-50/30 relative selection:bg-brand-100">
       {/* Search Spotlight Effect */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-[radial-gradient(circle_at_30%_20%,rgba(var(--brand-600-rgb),0.08),transparent_70%)] pointer-events-none z-0"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto p-4 md:p-8 lg:p-12">
-        <div className="flex items-center gap-3 mb-8">
-          <div className="h-10 w-10 bg-linear-to-br from-brand-600 to-brand-800 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-brand-500/20">
-            B
-          </div>
-        </div>
+        {/* Page Header */}
+        <header className="mb-12">
+          <h1 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter mb-4 leading-tight">
+            Plan your <span className="text-brand-600">journey.</span>
+          </h1>
+          <p className="text-gray-500 font-medium text-lg md:text-xl max-w-2xl leading-relaxed">
+            Discover the best routes, explore trending destinations, and manage your daily commute
+            with ease.
+          </p>
+        </header>
+
         <div className="lg:grid lg:grid-cols-12 lg:gap-12 items-start">
-          {/* Left Column: Plan Journey */}
-          <div className="lg:col-span-7 xl:col-span-8 space-y-8">
+          {/* Left Column: Discovery & Planning */}
+          <div className="lg:col-span-7 xl:col-span-8 space-y-12">
+            {/* 1. Imagery-First Discovery (Trending) */}
+            <section>
+              <div className="flex items-center gap-2 mb-6 px-2">
+                <MapPin size={16} className="text-brand-600" />
+                <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">
+                  Trending Destinations
+                </h3>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {popularDestinations.map((place, i) => (
+                  <motion.div
+                    key={i}
+                    whileHover={{ y: -5 }}
+                    className="group relative h-52 rounded-[2rem] overflow-hidden cursor-pointer shadow-lg hover:shadow-brand-900/10 transition-all border border-transparent hover:border-brand-100"
+                    onClick={() =>
+                      navigate(
+                        `/routes?dest=${encodeURIComponent(place.name)}&origin=Current Location`,
+                      )
+                    }
+                  >
+                    <img
+                      src={place.image}
+                      alt={place.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 p-5 w-full">
+                      <h4 className="text-white text-lg font-bold drop-shadow-md">{place.name}</h4>
+                      <p className="text-white/70 text-[10px] font-semibold uppercase tracking-widest leading-none mt-1">
+                        {place.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </section>
+
+            {/* 2. Main Search Call to Action */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="w-full"
             >
+              <div className="flex items-center gap-2 mb-4 px-2">
+                <TrendingUp size={16} className="text-brand-600" />
+                <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">
+                  Find a Route
+                </h3>
+              </div>
               <StopSearch onRouteSelected={handleRouteSelected} />
             </motion.div>
 
-            {/* Saved Places (Mobile Only - will be hidden on large screens or moved) */}
+            {/* 3. Saved Places (Mobile Only) */}
             <section className="lg:hidden">
               <div className="flex items-center justify-between mb-4 px-2">
                 <div className="flex items-center gap-2">
                   <Bookmark size={16} className="text-gray-400" />
-                  <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">
+                  <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider">
                     Saved Places
                   </h3>
                 </div>
@@ -97,7 +147,9 @@ export const SearchPage = () => {
                     </div>
                     <div className="flex-1">
                       <h4 className="font-bold text-gray-900">{place.name}</h4>
-                      <p className="text-xs text-gray-400 truncate w-32">{place.address}</p>
+                      <p className="text-xs text-gray-400 truncate w-32 font-medium">
+                        {place.address}
+                      </p>
                     </div>
                     <ChevronRight size={16} className="text-gray-300" />
                   </div>
@@ -106,20 +158,20 @@ export const SearchPage = () => {
             </section>
           </div>
 
-          {/* Right Column: Recent & Trending */}
+          {/* Right Column: History & Saved (Desktop) */}
           <div className="hidden lg:block lg:col-span-5 xl:col-span-4 space-y-10">
             {/* Desktop Saved Places */}
             <section>
               <div className="flex items-center justify-between mb-4 px-2">
                 <div className="flex items-center gap-2">
                   <Star size={16} className="text-brand-500" />
-                  <h3 className="text-sm font-black text-gray-900 uppercase tracking-wider">
+                  <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">
                     Saved Locations
                   </h3>
                 </div>
                 <button
                   onClick={() => navigate('/saved')}
-                  className="text-[10px] font-black uppercase text-brand-600 tracking-widest hover:underline"
+                  className="text-[10px] font-bold uppercase text-brand-600 tracking-widest hover:underline"
                 >
                   Manage
                 </button>
@@ -139,8 +191,8 @@ export const SearchPage = () => {
                       <Bookmark size={20} />
                     </div>
                     <div>
-                      <h4 className="font-black text-gray-900 leading-none mb-1">{place.name}</h4>
-                      <p className="text-[10px] font-bold text-gray-400 truncate">
+                      <h4 className="font-bold text-gray-900 leading-none mb-1">{place.name}</h4>
+                      <p className="text-[10px] font-semibold text-gray-400 truncate">
                         {place.address}
                       </p>
                     </div>
@@ -152,7 +204,7 @@ export const SearchPage = () => {
             <section>
               <div className="flex items-center gap-2 mb-4 px-2">
                 <Clock size={16} className="text-gray-400" />
-                <h3 className="text-sm font-black text-gray-900 uppercase tracking-wider">
+                <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">
                   Recent History
                 </h3>
               </div>
@@ -180,54 +232,6 @@ export const SearchPage = () => {
                       <TrendingUp size={14} />
                     </div>
                   </div>
-                ))}
-              </div>
-            </section>
-          </div>
-
-          {/* Common Section for Both: Trending Places (Desktop & Mobile) */}
-          <div className="lg:col-span-12 mt-12 mb-20 lg:mt-0">
-            <section>
-              <div className="flex items-center gap-2 mb-6 px-2">
-                <MapPin size={16} className="text-brand-600" />
-                <h3 className="text-sm font-black text-gray-900 uppercase tracking-wider">
-                  Trending Destinations
-                </h3>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {popularDestinations.map((place, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ y: -5 }}
-                    className="group relative h-56 rounded-[2.5rem] overflow-hidden cursor-pointer shadow-lg hover:shadow-brand-900/10 transition-all border border-transparent hover:border-brand-100"
-                    onClick={() =>
-                      navigate(
-                        `/routes?dest=${encodeURIComponent(place.name)}&origin=Current Location`,
-                      )
-                    }
-                  >
-                    <img
-                      src={place.image}
-                      alt={place.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 p-6 w-full">
-                      <div className="flex justify-between items-end">
-                        <div className="flex-1">
-                          <h4 className="text-white text-xl font-black leading-tight drop-shadow-md">
-                            {place.name}
-                          </h4>
-                          <p className="text-white/80 text-xs mt-1 font-bold uppercase tracking-widest drop-shadow-md">
-                            {place.description}
-                          </p>
-                        </div>
-                        <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform">
-                          <ChevronRight size={20} />
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
                 ))}
               </div>
             </section>

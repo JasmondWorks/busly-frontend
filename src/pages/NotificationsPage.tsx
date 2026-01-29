@@ -1,4 +1,4 @@
-import { Bell, ArrowLeft, CheckCircle2, Clock, Info } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, Clock, Info } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -52,12 +52,7 @@ export default function NotificationsPage() {
             >
               <ArrowLeft size={20} />
             </button>
-            <div className="flex items-center gap-3">
-              <div className="h-12 w-12 bg-linear-to-br from-brand-600 to-brand-800 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-xl shadow-brand-500/20">
-                B
-              </div>
-              <h1 className="text-4xl font-black text-gray-900 tracking-tighter">Notifications</h1>
-            </div>
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Notifications</h1>
           </div>
           <button className="text-sm font-bold text-gray-400 hover:text-brand-600 transition-colors">
             Clear all
@@ -88,8 +83,8 @@ export default function NotificationsPage() {
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-start mb-1">
-                    <h3 className="font-bold text-gray-900">{notif.title}</h3>
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                    <h3 className="font-bold text-slate-900">{notif.title}</h3>
+                    <span className="text-[10px] font-medium text-slate-400 uppercase tracking-widest">
                       {notif.time}
                     </span>
                   </div>
@@ -102,12 +97,12 @@ export default function NotificationsPage() {
           ))}
         </div>
 
-        <div className="mt-12 text-center py-10 border-2 border-dashed border-gray-200 rounded-3xl">
+        <section className="mt-12 text-center py-10 border-2 border-dashed border-gray-200 rounded-3xl">
           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-300">
             <CheckCircle2 size={32} />
           </div>
-          <p className="text-gray-400 font-bold">You're all caught up!</p>
-        </div>
+          <p className="text-gray-400 font-semibold">You're all caught up!</p>
+        </section>
       </div>
     </div>
   );

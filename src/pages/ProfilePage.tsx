@@ -50,10 +50,7 @@ export default function ProfilePage() {
       <div className="max-w-7xl mx-auto p-4 md:p-8 lg:p-12 relative z-10">
         {/* Page Header with Logo */}
         <div className="flex items-center gap-3 mb-10">
-          <div className="h-10 w-10 bg-linear-to-br from-brand-600 to-brand-800 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-brand-500/20">
-            B
-          </div>
-          <h1 className="text-3xl font-black text-slate-900 tracking-tight">Account</h1>
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Account</h1>
         </div>
 
         <div className="lg:grid lg:grid-cols-12 lg:gap-10 items-start">
@@ -74,9 +71,9 @@ export default function ProfilePage() {
                     <User size={40} />
                   </div>
                 </div>
-                <h1 className="text-3xl font-black tracking-tight mb-1">{user.name}</h1>
+                <h1 className="text-3xl font-bold tracking-tight mb-1">{user.name}</h1>
                 <p className="text-slate-400 font-medium text-sm mb-6">{user.email}</p>
-                <div className="px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/10 text-brand-300 text-[10px] font-black uppercase tracking-widest rounded-full mb-6">
+                <div className="px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/10 text-brand-300 text-[10px] font-semibold uppercase tracking-widest rounded-full mb-6">
                   {user.level} {auth.user?.role === 'driver' && '• Driver Mode'}
                 </div>
 
@@ -87,7 +84,7 @@ export default function ProfilePage() {
                     if (isCurrentlyDriver) navigate('/');
                     else navigate('/driver');
                   }}
-                  className="w-full py-3 bg-white text-slate-900 rounded-xl text-sm font-black shadow-lg hover:bg-gray-100 transition-all active:scale-95"
+                  className="w-full py-3 bg-white text-slate-900 rounded-xl text-sm font-bold shadow-lg hover:bg-gray-100 transition-all active:scale-95"
                 >
                   Switch to {auth.user?.role === 'driver' ? 'Commuter' : 'Driver'} View
                 </button>
@@ -122,11 +119,11 @@ export default function ProfilePage() {
             {/* Recent Activity Section */}
             <section className="bg-white rounded-3xl border border-slate-100 p-8 shadow-sm hover:shadow-xl hover:shadow-slate-200/20 transition-all">
               <div className="flex items-center justify-between mb-8">
-                <h3 className="font-black text-xl text-slate-900 uppercase tracking-tight flex items-center gap-3">
+                <h3 className="font-bold text-xl text-slate-900 uppercase tracking-tight flex items-center gap-3">
                   <div className="w-2 h-6 bg-brand-500 rounded-full"></div>
                   Recent Activity
                 </h3>
-                <button className="text-xs font-black uppercase text-brand-600 tracking-widest hover:underline">
+                <button className="text-xs font-semibold uppercase text-brand-600 tracking-widest hover:underline">
                   View All
                 </button>
               </div>
@@ -138,10 +135,10 @@ export default function ProfilePage() {
                     <div className="w-4 h-4 rounded-full bg-slate-100 ring-4 ring-white shrink-0 mt-1.5 group-hover:bg-brand-500 transition-all shadow-sm"></div>
                     <div className="flex-1 bg-slate-50/50 p-4 rounded-xl group-hover:bg-white border border-transparent group-hover:border-slate-100 transition-all">
                       <div className="flex items-center justify-between mb-1">
-                        <p className="text-base font-black text-slate-900">
+                        <p className="text-base font-bold text-slate-900">
                           Trip to Victoria Island
                         </p>
-                        <span className="text-[10px] font-black text-brand-500 uppercase">
+                        <span className="text-[10px] font-semibold text-brand-500 uppercase">
                           Completed
                         </span>
                       </div>
@@ -158,7 +155,7 @@ export default function ProfilePage() {
 
             {/* Achievements Section */}
             <section className="bg-white rounded-3xl border border-slate-100 p-8 shadow-sm">
-              <h3 className="font-black text-xl text-slate-900 uppercase tracking-tight mb-8 flex items-center gap-3">
+              <h3 className="font-bold text-xl text-slate-900 uppercase tracking-tight mb-8 flex items-center gap-3">
                 <div className="w-2 h-6 bg-purple-500 rounded-full"></div>
                 Achievements
               </h3>
@@ -173,7 +170,7 @@ export default function ProfilePage() {
                     >
                       {ach.icon}
                     </div>
-                    <h4 className="font-black text-slate-900 text-sm mb-1">{ach.title}</h4>
+                    <h4 className="font-bold text-slate-900 text-sm mb-1">{ach.title}</h4>
                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                       {ach.desc}
                     </p>
@@ -187,7 +184,7 @@ export default function ProfilePage() {
               <section className="bg-white rounded-3xl border border-slate-100 p-8 shadow-sm">
                 <div className="flex items-center gap-3 mb-6">
                   <Smartphone className="text-brand-600" size={20} />
-                  <h3 className="font-black text-lg text-slate-900 uppercase tracking-tight">
+                  <h3 className="font-bold text-lg text-slate-900 uppercase tracking-tight">
                     Active Devices
                   </h3>
                 </div>
@@ -212,7 +209,7 @@ export default function ProfilePage() {
                 </div>
                 <div className="relative z-10 h-full flex flex-col justify-between">
                   <div>
-                    <h3 className="font-black text-xl mb-2 tracking-tight">Security Score</h3>
+                    <h3 className="font-bold text-xl mb-2 tracking-tight">Security Score</h3>
                     <p className="text-slate-400 text-sm font-medium">
                       Your account is well protected.
                     </p>
@@ -221,7 +218,7 @@ export default function ProfilePage() {
                     <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
                       <div className="w-[85%] h-full bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
                     </div>
-                    <span className="font-black text-emerald-400 text-sm">85%</span>
+                    <span className="font-bold text-emerald-400 text-sm">85%</span>
                   </div>
                 </div>
               </section>
@@ -260,10 +257,10 @@ function StatCard({
         {icon}
       </div>
       <div>
-        <div className="text-3xl font-black text-slate-900 tracking-tight leading-none mb-1">
+        <div className="text-3xl font-bold text-slate-900 tracking-tight leading-none mb-1">
           {value}
         </div>
-        <div className="text-[10px] uppercase font-black text-slate-400 tracking-widest">
+        <div className="text-[10px] uppercase font-semibold text-slate-400 tracking-widest">
           {label}
         </div>
       </div>
@@ -289,14 +286,14 @@ function DeviceRow({
           {icon}
         </div>
         <div>
-          <p className="text-sm font-black text-slate-900">{name}</p>
-          <p className="text-[10px] font-black text-slate-400 uppercase tracking-wider">
+          <p className="text-sm font-bold text-slate-900">{name}</p>
+          <p className="text-[10px] font-medium text-slate-400 uppercase tracking-wider">
             {lastActive}
           </p>
         </div>
       </div>
       {current ? (
-        <span className="text-[10px] font-black text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-md uppercase">
+        <span className="text-[10px] font-semibold text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-md uppercase">
           This Device
         </span>
       ) : (

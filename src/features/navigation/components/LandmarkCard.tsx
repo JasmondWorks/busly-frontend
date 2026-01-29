@@ -121,7 +121,7 @@ export function LandmarkCard({ landmarks, stopName }: LandmarkCardProps) {
             )}
 
             {/* Type Badge */}
-            <div className="absolute top-3 left-3 flex gap-2">
+            <div className="absolute top-4 left-4 z-100">
               {currentLandmark.type === 'system' ? (
                 <span className="px-2 py-1 bg-black/60 backdrop-blur text-white text-[10px] font-bold uppercase tracking-wider rounded-md border border-white/10">
                   System Default

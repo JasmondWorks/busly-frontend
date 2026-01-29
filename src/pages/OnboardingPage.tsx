@@ -10,7 +10,7 @@ export default function OnboardingPage() {
       {/* Left Column: Hero (Desktop Only) - Flat Clean Color */}
       <div className="hidden md:flex flex-1 bg-brand-600 text-white flex-col justify-center px-12 relative overflow-hidden">
         {/* Subtle pattern instead of gradient */}
-        <div className="absolute inset-0 opacity-5 bg-[radial-gradient(circle_at_center,_white_1px,_transparent_1px)] bg-[length:24px_24px]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,white_1px,transparent_1px)] bg-size-[24px_24px] opacity-[0.4] pointer-events-none"></div>
 
         <div className="relative z-10 max-w-md">
           <h1 className="text-5xl font-extrabold tracking-tighter mb-6 relative">

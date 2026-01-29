@@ -19,16 +19,11 @@ export default function SavedPage() {
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-brand-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
-      <header className="flex items-center gap-4 relative z-10">
-        <div className="h-10 w-10 bg-linear-to-br from-brand-600 to-brand-800 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-brand-500/20">
-          B
-        </div>
-        <div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tighter mb-2">Saved</h1>
-          <p className="text-slate-500 font-medium max-w-sm">
-            Your personal collection of routes and favorite stops.
-          </p>
-        </div>
+      <header className="relative z-10">
+        <h1 className="text-3xl font-black text-slate-900 tracking-tight mb-2">Saved</h1>
+        <p className="text-slate-500 font-medium max-w-sm">
+          Your personal collection of routes and favorite stops.
+        </p>
       </header>
 
       {/* Saved Routes */}

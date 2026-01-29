@@ -49,11 +49,6 @@ export default function HomePage() {
       <div className="max-w-7xl mx-auto space-y-24 relative z-10">
         {/* HERO SECTION */}
         <section className="relative text-center max-w-4xl mx-auto pb-4 md:pb-8">
-          <div className="flex justify-center mb-8">
-            <div className="h-12 w-12 bg-linear-to-br from-brand-600 to-brand-800 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-xl shadow-brand-500/20">
-              B
-            </div>
-          </div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -72,7 +67,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-8xl font-black tracking-tighter mb-4 md:mb-8 leading-[0.95] text-gray-900"
+            className="text-3xl md:text-6xl font-black tracking-tighter mb-4 md:mb-8 leading-[1.1] text-gray-900"
           >
             Total clarity over <br /> your{' '}
             <span className="text-brand-600 relative inline-block">

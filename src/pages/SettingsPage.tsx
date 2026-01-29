@@ -6,11 +6,8 @@ export default function SettingsPage() {
   const navigate = useNavigate();
   return (
     <div className="p-6 md:p-8 max-w-2xl mx-auto">
-      <div className="flex items-center gap-3 mb-8">
-        <div className="h-10 w-10 bg-linear-to-br from-brand-600 to-brand-800 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-brand-500/20">
-          B
-        </div>
-        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Settings</h1>
+      <div className="mb-8">
+        <h1 className="text-3xl font-black text-slate-900 tracking-tight">Settings</h1>
       </div>
 
       <div className="space-y-6">

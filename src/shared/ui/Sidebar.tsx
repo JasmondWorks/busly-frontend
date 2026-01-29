@@ -9,7 +9,7 @@ export default function Sidebar() {
     <aside className="w-20 lg:w-72 h-full bg-white border-r border-gray-100 flex flex-col py-8 transition-all duration-300 z-50 relative overflow-hidden shadow-2xl shadow-slate-200/50">
       {/* Brand Logo Area */}
       <div className="mb-12 px-0 lg:px-8 flex items-center justify-center lg:justify-start w-full relative z-10">
-        <div className="h-12 w-12 bg-gradient-to-br from-brand-600 to-brand-800 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-xl shadow-brand-500/30 transform transition-transform hover:scale-110 cursor-pointer">
+        <div className="h-12 w-12 bg-linear-to-br from-brand-600 to-brand-800 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-xl shadow-brand-500/30 transform transition-transform hover:scale-110 cursor-pointer">
           B
         </div>
         <span className="ml-4 font-black text-2xl hidden lg:block tracking-tighter text-slate-900">
@@ -33,7 +33,7 @@ export default function Sidebar() {
             >
               {/* Active State background shape */}
               {isActive && (
-                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -mr-10 -mt-10 blur-xl"></div>
+                <div className="absolute inset-0 bg-slate-50 bg-size-[20px_20px] bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.02)_1px,transparent_1px)]"></div>
               )}
 
               <item.icon
@@ -60,7 +60,7 @@ export default function Sidebar() {
       <div className="mt-auto px-3 lg:px-6 relative z-10">
         <div className="p-4 rounded-3xl bg-slate-50 border border-slate-100 flex items-center justify-center lg:justify-start gap-4 cursor-pointer hover:bg-white hover:shadow-lg transition-all group">
           <div className="w-10 h-10 rounded-full bg-slate-200 overflow-hidden ring-2 ring-white group-hover:ring-brand-200 transition-all">
-            <div className="w-full h-full bg-gradient-to-tr from-brand-400 to-purple-400"></div>
+            <div className="w-full h-full bg-linear-to-tr from-brand-400 to-purple-400"></div>
           </div>
           <div className="hidden lg:block overflow-hidden">
             <p className="text-sm font-bold text-slate-900 truncate">Jasmond</p>

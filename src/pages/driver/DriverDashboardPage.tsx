@@ -21,11 +21,8 @@ export default function DriverDashboardPage() {
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-4">
-              <div className="h-10 w-10 bg-linear-to-br from-brand-600 to-brand-800 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-brand-500/20">
-                B
-              </div>
               <div>
-                <h1 className="text-2xl font-black tracking-tight text-slate-900">Dashboard</h1>
+                <h1 className="text-2xl font-bold tracking-tight text-slate-900">Dashboard</h1>
                 <p className="text-slate-400 font-medium text-sm">Sunday, 31 August</p>
               </div>
             </div>
@@ -62,11 +59,11 @@ export default function DriverDashboardPage() {
               <div className="relative z-10">
                 <div className="flex items-center gap-2 mb-2 opacity-90">
                   <ClipboardCheck size={16} />
-                  <span className="text-[10px] font-black uppercase tracking-widest">
+                  <span className="text-[10px] font-semibold uppercase tracking-widest">
                     Completed
                   </span>
                 </div>
-                <div className="text-3xl font-black">12/15</div>
+                <div className="text-3xl font-bold">12/15</div>
                 <p className="text-brand-100 text-[10px] font-bold mt-1 uppercase tracking-widest">
                   Trips this week
                 </p>
@@ -75,10 +72,10 @@ export default function DriverDashboardPage() {
             <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
               <div className="flex items-center gap-2 mb-2 text-slate-400">
                 <Star size={16} className="text-orange-400 fill-orange-400" />
-                <span className="text-[10px] font-black uppercase tracking-widest">Rating</span>
+                <span className="text-[10px] font-semibold uppercase tracking-widest">Rating</span>
               </div>
-              <div className="text-3xl font-black text-slate-900">4.9</div>
-              <p className="text-emerald-500 text-[10px] font-black mt-1 uppercase tracking-widest flex items-center gap-1">
+              <div className="text-3xl font-bold text-slate-900">4.9</div>
+              <p className="text-emerald-500 text-[10px] font-bold mt-1 uppercase tracking-widest flex items-center gap-1">
                 <TrendingUp size={12} /> Top 5% Driver
               </p>
             </div>
@@ -90,7 +87,7 @@ export default function DriverDashboardPage() {
         <div className="max-w-4xl mx-auto">
           {/* Timeline Section */}
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-xl font-black text-slate-900 tracking-tight">Training & Routes</h2>
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Training & Routes</h2>
             <button
               onClick={() => navigate('/driver/calendar')}
               className="px-4 py-2 bg-white text-brand-600 font-bold text-xs rounded-full border border-gray-100 shadow-sm hover:shadow-md transition-all"
@@ -119,10 +116,10 @@ export default function DriverDashboardPage() {
                 <div className="max-w-xl mx-auto bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 hover:border-brand-100 transition-all group">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h3 className="font-extrabold text-xl text-slate-900 mb-1 group-hover:text-brand-600 transition-colors">
+                      <h3 className="font-bold text-xl text-slate-900 mb-1 group-hover:text-brand-600 transition-colors">
                         {route.name}
                       </h3>
-                      <div className="flex items-center gap-3 text-slate-400 text-[10px] font-black uppercase tracking-widest">
+                      <div className="flex items-center gap-3 text-slate-400 text-[10px] font-semibold uppercase tracking-widest">
                         <div className="flex items-center gap-1 bg-slate-50 px-2 py-1 rounded-md">
                           <Clock size={12} />
                           {route.startTime}
@@ -132,11 +129,11 @@ export default function DriverDashboardPage() {
                       </div>
                     </div>
                     {i === 0 ? (
-                      <span className="px-2.5 py-1 bg-brand-600 text-white text-[9px] font-black uppercase tracking-widest rounded-lg shadow-lg shadow-brand-500/20">
+                      <span className="px-2.5 py-1 bg-brand-600 text-white text-[9px] font-semibold uppercase tracking-widest rounded-lg shadow-lg shadow-brand-500/20">
                         Next Route
                       </span>
                     ) : (
-                      <span className="px-2.5 py-1 bg-slate-100 text-slate-400 text-[9px] font-black uppercase tracking-widest rounded-lg">
+                      <span className="px-2.5 py-1 bg-slate-100 text-slate-400 text-[9px] font-semibold uppercase tracking-widest rounded-lg">
                         Scheduled
                       </span>
                     )}
@@ -152,7 +149,7 @@ export default function DriverDashboardPage() {
                     </button>
                     <button
                       onClick={() => navigate(`/driver/active/${route.id}`)}
-                      className={`flex-1 min-w-[140px] flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-black transition-all active:scale-95 group/btn whitespace-nowrap shadow-sm hover:shadow-md ${
+                      className={`flex-1 min-w-[140px] flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-bold transition-all active:scale-95 group/btn whitespace-nowrap shadow-sm hover:shadow-md ${
                         i === 0
                           ? 'bg-slate-900 text-white hover:bg-brand-600 shadow-lg shadow-slate-900/10'
                           : 'bg-slate-50 text-slate-400 hover:bg-slate-100 border border-slate-100'

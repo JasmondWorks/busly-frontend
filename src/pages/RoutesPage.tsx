@@ -27,13 +27,8 @@ export default function RoutesPage() {
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Header */}
         <header className="flex items-center gap-5">
-          <div className="h-12 w-12 bg-linear-to-br from-brand-600 to-brand-800 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-xl shadow-brand-500/20">
-            B
-          </div>
           <div>
-            <h1 className="text-4xl font-black text-gray-900 tracking-tighter mb-1">
-              Find your <span className="text-brand-600">route.</span>
-            </h1>
+            <h1 className="text-4xl font-black text-gray-900 tracking-tighter">Routes</h1>
             <p className="text-gray-500 font-medium text-lg">
               Search for buses, terminals, or destinations.
             </p>
@@ -96,7 +91,7 @@ export default function RoutesPage() {
                 <div className="flex items-center justify-between mb-4 relative z-10">
                   <div className="flex items-center gap-3">
                     <span
-                      className={`px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wider border ${
+                      className={`px-2 py-0.5 rounded-lg text-[10px] font-semibold uppercase tracking-wider border ${
                         route.type === 'Express'
                           ? 'bg-purple-50 text-purple-600 border-purple-100'
                           : route.type === 'BRT'
@@ -107,7 +102,7 @@ export default function RoutesPage() {
                       {route.type}
                     </span>
                     <span
-                      className={`text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 ${
+                      className={`text-[9px] font-semibold uppercase tracking-wider flex items-center gap-1 ${
                         route.status === 'Fast'
                           ? 'text-emerald-500'
                           : route.status === 'Congested'
@@ -127,33 +122,33 @@ export default function RoutesPage() {
                       {route.status}
                     </span>
                   </div>
-                  <span className="font-bold text-gray-900 border-b-2 border-brand-100 pb-0.5">
-                    {route.price}
-                  </span>
+                  <div className="group-hover:opacity-0 transition-opacity whitespace-nowrap">
+                    <span className="font-semibold text-gray-900">{route.price}</span>
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-4 relative z-10">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-2.5 h-2.5 rounded-full border-2 border-brand-400 bg-white ring-4 ring-brand-50"></div>
-                      <h3 className="text-lg font-black text-gray-900 line-clamp-1 tracking-tight">
+                      <h3 className="text-lg font-bold text-gray-900 line-clamp-1 tracking-tight">
                         {route.from}
                       </h3>
                     </div>
                     <div className="ml-[4px] w-0.5 h-4 bg-gray-100 my-0.5 rounded-full"></div>
                     <div className="flex items-center gap-3">
                       <div className="w-2.5 h-2.5 rounded-full bg-brand-600 ring-4 ring-brand-50"></div>
-                      <h3 className="text-lg font-black text-gray-900 line-clamp-1 tracking-tight">
+                      <h3 className="text-lg font-bold text-gray-900 line-clamp-1 tracking-tight">
                         {route.to}
                       </h3>
                     </div>
                   </div>
 
-                  <div className="text-right">
-                    <p className="text-[10px] font-black uppercase text-gray-300 tracking-widest mb-0.5">
+                  <div className="text-right group-hover:opacity-0 transition-opacity">
+                    <p className="text-[10px] font-medium uppercase text-gray-400 tracking-wider mb-0.5">
                       Duration
                     </p>
-                    <p className="text-base font-bold text-gray-900">{route.duration}</p>
+                    <p className="text-base font-semibold text-gray-900">{route.duration}</p>
                   </div>
                 </div>
 
