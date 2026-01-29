@@ -12,7 +12,7 @@ import {
   Globe,
 } from 'lucide-react';
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { createPortal } from 'react-dom';
 
 interface Landmark {
@@ -215,7 +215,7 @@ export function LandmarkCard({ landmarks, stopName }: LandmarkCardProps) {
       {/* MODAL - Details View */}
       {showModal &&
         createPortal(
-          <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center p-4">
+          <div className="fixed inset-0 z-100 flex items-end md:items-center justify-center p-4">
             <div
               className="absolute inset-0 bg-black/60 backdrop-blur-sm"
               onClick={() => setShowModal(false)}
@@ -265,7 +265,7 @@ export function LandmarkCard({ landmarks, stopName }: LandmarkCardProps) {
       {/* MODAL - Add Landmark Form (Simulated) */}
       {showAddForm &&
         createPortal(
-          <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center p-4">
+          <div className="fixed inset-0 z-100 flex items-end md:items-center justify-center p-4">
             <div
               className="absolute inset-0 bg-black/60 backdrop-blur-sm"
               onClick={() => setShowAddForm(false)}

@@ -69,7 +69,7 @@ export default function ContributionHubPage() {
           </div>
           <div className="w-16 h-16 relative z-10">
             {/* Simple SVG Gauge Visualization */}
-            <svg viewBox="0 0 36 36" className="w-full h-full rotate-[-90deg]">
+            <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
               <path
                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                 fill="none"

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MapPin, Navigation } from 'lucide-react';
+import { Navigation } from 'lucide-react';
 import { useMemo } from 'react';
 
 interface Stop {
@@ -51,7 +51,7 @@ export function NavigationMap({ stops, currentStopIndex }: NavigationMapProps) {
   return (
     <div className="relative w-full h-full bg-slate-50 overflow-hidden select-none">
       {/* Background Texture (Grid) */}
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:20px_20px]"></div>
+      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [bg-size:20px_20px]"></div>
 
       {/* SVG Layer */}
       <svg className="w-full h-full" viewBox="40 40 620 480" preserveAspectRatio="xMidYMid meet">

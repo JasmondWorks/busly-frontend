@@ -31,7 +31,7 @@ export const RouteSelectionPage = () => {
     fetchRoutes();
   }, [originId, destinationId]);
 
-  const handleSelectRoute = (route: Route) => {
+  const handleSelectRoute = (_: Route) => {
     navigate('/navigation/active'); // Directing to the ActiveMock for demo purposes
   };
 

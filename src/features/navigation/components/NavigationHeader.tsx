@@ -18,7 +18,7 @@ export function NavigationHeader({
       className={`relative overflow-hidden ${isAlighting ? 'bg-orange-500' : 'bg-brand-600'} text-white p-4 md:p-6 shadow-xl shadow-brand-900/10 transition-colors duration-500 rounded-b-[2rem] md:rounded-b-none shrink-0 z-20`}
     >
       {/* Background Texture & Shapes */}
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top_right,_white_1px,_transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top_right,white_1px,transparent_1px)] bg-size-[20px_20px] pointer-events-none"></div>
       <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
 

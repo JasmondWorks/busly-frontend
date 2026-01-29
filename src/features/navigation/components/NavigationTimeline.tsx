@@ -1,4 +1,3 @@
-import { MapPin } from 'lucide-react';
 import { LandmarkCard } from './LandmarkCard';
 
 interface Landmark {
@@ -60,7 +59,7 @@ function TimelineItem({
         <div
           className={`w-3 h-3 rounded-full z-10 ${isCurrent ? 'bg-orange-500 ring-4 ring-orange-100' : isPast ? 'bg-orange-500' : 'bg-gray-300'}`}
         />
-        {!isLast && <div className="w-0.5 flex-1 bg-gray-100 -my-1 min-h-[4rem]" />}
+        {!isLast && <div className="w-0.5 flex-1 bg-gray-100 -my-1 min-h-16" />}
       </div>
 
       <div className="flex-1 pb-8">

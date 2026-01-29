@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import type { Route, Stop } from '../types';
-import { Bus, MapPin, ArrowRight } from 'lucide-react';
+import { MapPin, ArrowRight } from 'lucide-react';
 
 interface NavigationSessionProps {
   route: Route;
