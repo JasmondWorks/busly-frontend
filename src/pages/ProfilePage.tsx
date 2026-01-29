@@ -62,7 +62,7 @@ export default function ProfilePage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="relative overflow-hidden bg-slate-900 rounded-[2.5rem] p-8 text-white shadow-2xl shadow-slate-900/20"
+              className="relative overflow-hidden bg-slate-900 rounded-3xl p-8 text-white shadow-2xl shadow-slate-900/20"
             >
               {/* Abstract pattern */}
               <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(circle_at_top_right,white_1px,transparent_1px)] bg-size-[20px_20px]"></div>
@@ -87,7 +87,7 @@ export default function ProfilePage() {
                     if (isCurrentlyDriver) navigate('/');
                     else navigate('/driver');
                   }}
-                  className="w-full py-3 bg-white text-slate-900 rounded-2xl text-sm font-black shadow-lg hover:bg-gray-100 transition-all active:scale-95"
+                  className="w-full py-3 bg-white text-slate-900 rounded-xl text-sm font-black shadow-lg hover:bg-gray-100 transition-all active:scale-95"
                 >
                   Switch to {auth.user?.role === 'driver' ? 'Commuter' : 'Driver'} View
                 </button>
@@ -120,7 +120,7 @@ export default function ProfilePage() {
           {/* Right Column: Detailed Sections */}
           <div className="lg:col-span-8 mt-10 lg:mt-0 space-y-8">
             {/* Recent Activity Section */}
-            <section className="bg-white rounded-[2.5rem] border border-slate-100 p-8 shadow-sm hover:shadow-xl hover:shadow-slate-200/20 transition-all">
+            <section className="bg-white rounded-3xl border border-slate-100 p-8 shadow-sm hover:shadow-xl hover:shadow-slate-200/20 transition-all">
               <div className="flex items-center justify-between mb-8">
                 <h3 className="font-black text-xl text-slate-900 uppercase tracking-tight flex items-center gap-3">
                   <div className="w-2 h-6 bg-brand-500 rounded-full"></div>
@@ -136,7 +136,7 @@ export default function ProfilePage() {
                 {[1, 2, 3].map((_, i) => (
                   <div key={i} className="flex gap-6 relative z-10 group">
                     <div className="w-4 h-4 rounded-full bg-slate-100 ring-4 ring-white shrink-0 mt-1.5 group-hover:bg-brand-500 transition-all shadow-sm"></div>
-                    <div className="flex-1 bg-slate-50/50 p-4 rounded-2xl group-hover:bg-white border border-transparent group-hover:border-slate-100 transition-all">
+                    <div className="flex-1 bg-slate-50/50 p-4 rounded-xl group-hover:bg-white border border-transparent group-hover:border-slate-100 transition-all">
                       <div className="flex items-center justify-between mb-1">
                         <p className="text-base font-black text-slate-900">
                           Trip to Victoria Island
@@ -157,7 +157,7 @@ export default function ProfilePage() {
             </section>
 
             {/* Achievements Section */}
-            <section className="bg-white rounded-[2.5rem] border border-slate-100 p-8 shadow-sm">
+            <section className="bg-white rounded-3xl border border-slate-100 p-8 shadow-sm">
               <h3 className="font-black text-xl text-slate-900 uppercase tracking-tight mb-8 flex items-center gap-3">
                 <div className="w-2 h-6 bg-purple-500 rounded-full"></div>
                 Achievements
@@ -166,10 +166,10 @@ export default function ProfilePage() {
                 {achievements.map((ach, i) => (
                   <div
                     key={i}
-                    className="p-5 rounded-3xl border border-slate-50 bg-slate-50/30 flex flex-col items-center text-center hover:bg-white hover:border-brand-100 hover:shadow-lg hover:shadow-brand-900/5 transition-all group"
+                    className="p-5 rounded-2xl border border-slate-50 bg-slate-50/30 flex flex-col items-center text-center hover:bg-white hover:border-brand-100 hover:shadow-lg hover:shadow-brand-900/5 transition-all group"
                   >
                     <div
-                      className={`${ach.color} w-12 h-12 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
+                      className={`${ach.color} w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
                     >
                       {ach.icon}
                     </div>
@@ -184,7 +184,7 @@ export default function ProfilePage() {
 
             {/* Linked Devices & Security */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <section className="bg-white rounded-[3rem] border border-slate-100 p-8 shadow-sm">
+              <section className="bg-white rounded-3xl border border-slate-100 p-8 shadow-sm">
                 <div className="flex items-center gap-3 mb-6">
                   <Smartphone className="text-brand-600" size={20} />
                   <h3 className="font-black text-lg text-slate-900 uppercase tracking-tight">
@@ -206,7 +206,7 @@ export default function ProfilePage() {
                 </div>
               </section>
 
-              <section className="bg-slate-900 rounded-[3rem] p-8 text-white relative overflow-hidden group cursor-pointer shadow-xl shadow-slate-900/10">
+              <section className="bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden group cursor-pointer shadow-xl shadow-slate-900/10">
                 <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-40 transition-opacity">
                   <ShieldCheck size={80} />
                 </div>
@@ -252,10 +252,10 @@ function StatCard({
 
   return (
     <div
-      className={`bg-white p-6 rounded-[2rem] border border-slate-100 flex items-center gap-6 shadow-sm hover:shadow-xl hover:shadow-slate-200/20 hover:${colors[color].split(' ')[3]} transition-all group`}
+      className={`bg-white p-6 rounded-2xl border border-slate-100 flex items-center gap-6 shadow-sm hover:shadow-xl hover:shadow-slate-200/20 hover:${colors[color].split(' ')[3]} transition-all group`}
     >
       <div
-        className={`${colors[color].split(' ').slice(0, 2).join(' ')} w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}
+        className={`${colors[color].split(' ').slice(0, 2).join(' ')} w-14 h-14 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}
       >
         {icon}
       </div>
@@ -283,7 +283,7 @@ function DeviceRow({
   current?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50/50 border border-transparent hover:border-slate-100 hover:bg-white transition-all group">
+    <div className="flex items-center justify-between p-4 rounded-xl bg-slate-50/50 border border-transparent hover:border-slate-100 hover:bg-white transition-all group">
       <div className="flex items-center gap-4">
         <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-400 group-hover:text-brand-600 shadow-sm transition-colors">
           {icon}

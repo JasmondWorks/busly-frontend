@@ -57,7 +57,7 @@ export default function DriverDashboardPage() {
 
           {/* Stats Row */}
           <div className="grid grid-cols-2 gap-3 mb-2">
-            <div className="bg-brand-500 p-5 rounded-[1.8rem] text-white relative overflow-hidden shadow-lg shadow-brand-500/20">
+            <div className="bg-brand-500 p-5 rounded-2xl text-white relative overflow-hidden shadow-lg shadow-brand-500/20">
               <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -mr-5 -mt-5 blur-2xl"></div>
               <div className="relative z-10">
                 <div className="flex items-center gap-2 mb-2 opacity-90">
@@ -72,7 +72,7 @@ export default function DriverDashboardPage() {
                 </p>
               </div>
             </div>
-            <div className="bg-white p-5 rounded-[1.8rem] border border-gray-100 shadow-sm">
+            <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
               <div className="flex items-center gap-2 mb-2 text-slate-400">
                 <Star size={16} className="text-orange-400 fill-orange-400" />
                 <span className="text-[10px] font-black uppercase tracking-widest">Rating</span>
@@ -116,7 +116,7 @@ export default function DriverDashboardPage() {
                   className={`absolute left-0 top-6 w-4 h-4 rounded-full border-[3px] z-10 bg-white ${i === 0 ? 'border-brand-500 shadow-[0_0_10px_rgba(79,70,229,0.2)]' : 'border-gray-200'}`}
                 ></div>
 
-                <div className="max-w-xl mx-auto bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 hover:border-brand-100 transition-all group">
+                <div className="max-w-xl mx-auto bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 hover:border-brand-100 transition-all group">
                   <div className="flex justify-between items-start mb-4">
                     <div>
                       <h3 className="font-extrabold text-xl text-slate-900 mb-1 group-hover:text-brand-600 transition-colors">
@@ -146,13 +146,13 @@ export default function DriverDashboardPage() {
                   <div className="flex flex-wrap gap-3">
                     <button
                       onClick={() => navigate(`/driver/learning/${route.id}`)}
-                      className="flex-1 min-w-[140px] flex items-center justify-center gap-2 py-3.5 rounded-2xl text-sm font-bold bg-slate-50 text-slate-600 hover:bg-slate-100 transition-all border border-transparent active:scale-95 whitespace-nowrap"
+                      className="flex-1 min-w-[140px] flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-bold bg-slate-50 text-slate-600 hover:bg-slate-100 transition-all border border-transparent active:scale-95 whitespace-nowrap"
                     >
                       <BookOpen size={18} /> Study Route
                     </button>
                     <button
                       onClick={() => navigate(`/driver/active/${route.id}`)}
-                      className={`flex-1 min-w-[140px] flex items-center justify-center gap-2 py-3.5 rounded-2xl text-sm font-black transition-all active:scale-95 group/btn whitespace-nowrap shadow-sm hover:shadow-md ${
+                      className={`flex-1 min-w-[140px] flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-black transition-all active:scale-95 group/btn whitespace-nowrap shadow-sm hover:shadow-md ${
                         i === 0
                           ? 'bg-slate-900 text-white hover:bg-brand-600 shadow-lg shadow-slate-900/10'
                           : 'bg-slate-50 text-slate-400 hover:bg-slate-100 border border-slate-100'

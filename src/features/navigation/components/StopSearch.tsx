@@ -81,7 +81,7 @@ const StopPicker = ({
             role="combobox"
             aria-expanded={open}
             className={cn(
-              'w-full justify-start text-left font-bold border-gray-100 hover:bg-gray-50 bg-white h-14 px-5 rounded-2xl shadow-sm transition-all',
+              'w-full justify-start text-left font-bold border-gray-100 hover:bg-gray-50 bg-white h-14 px-5 rounded-xl shadow-sm transition-all',
               !selected && 'text-gray-400',
               open && 'border-brand-600 ring-4 ring-brand-100 bg-white',
             )}
@@ -173,7 +173,7 @@ export const StopSearch = ({ onRouteSelected }: StopSearchProps) => {
   };
 
   return (
-    <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-xl shadow-brand-900/5 p-8 md:p-10 w-full relative overflow-hidden">
+    <div className="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-brand-900/5 p-8 md:p-10 w-full relative overflow-hidden">
       {/* Decorative Blobs */}
       <div className="absolute -top-24 -right-24 w-48 h-48 bg-brand-50 rounded-full blur-3xl opacity-50 z-0"></div>
       <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-blue-50 rounded-full blur-3xl opacity-50 z-0"></div>
@@ -225,7 +225,7 @@ export const StopSearch = ({ onRouteSelected }: StopSearchProps) => {
           disabled={!selectedOrigin || !selectedDest}
           onClick={handleFindRoute}
           className={cn(
-            'w-full py-4.5 px-6 rounded-2xl font-black text-base transition-all duration-300 flex items-center justify-center gap-3 mt-4 group shadow-xl',
+            'w-full py-4.5 px-6 rounded-xl font-black text-base transition-all duration-300 flex items-center justify-center gap-3 mt-4 group shadow-xl',
             selectedOrigin && selectedDest
               ? 'bg-brand-600 text-white hover:bg-brand-700 hover:scale-[1.02] active:scale-95 shadow-brand-600/20'
               : 'bg-gray-50 text-gray-300 cursor-not-allowed border border-gray-100 shadow-none',

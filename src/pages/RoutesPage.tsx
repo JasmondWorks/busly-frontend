@@ -51,7 +51,7 @@ export default function RoutesPage() {
               placeholder="Where do you want to go?"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-14 pl-12 pr-4 bg-white rounded-2xl border border-gray-200 shadow-sm text-lg font-bold text-gray-900 placeholder:text-gray-300 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-300 transition-all outline-none"
+              className="w-full h-14 pl-12 pr-4 bg-white rounded-xl border border-gray-200 shadow-sm text-lg font-bold text-gray-900 placeholder:text-gray-300 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-300 transition-all outline-none"
             />
           </div>
 
@@ -60,7 +60,7 @@ export default function RoutesPage() {
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`px-5 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap transition-all border ${
+                className={`px-5 py-2.5 rounded-lg text-sm font-bold whitespace-nowrap transition-all border ${
                   activeFilter === filter
                     ? 'bg-gray-900 text-white border-gray-900 shadow-lg'
                     : 'bg-white text-gray-500 border-gray-100 hover:border-gray-200 hover:bg-gray-50'
@@ -75,8 +75,8 @@ export default function RoutesPage() {
         {/* Routes Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {filteredRoutes.length === 0 ? (
-            <div className="text-center py-20 bg-gray-50 rounded-3xl border border-dashed border-gray-200">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-300">
+            <div className="mt-12 text-center py-10 border-2 border-dashed border-gray-200 rounded-3xl">
+              <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4 text-gray-300">
                 <Bus size={32} />
               </div>
               <p className="text-gray-400 font-medium">No routes found for your search.</p>
@@ -91,7 +91,7 @@ export default function RoutesPage() {
                 onClick={() => navigate('/navigation/active')}
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
-                className="bg-white p-5 rounded-[1.5rem] border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-brand-900/5 hover:border-brand-200 transition-all cursor-pointer group relative overflow-hidden"
+                className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-brand-900/5 hover:border-brand-200 transition-all cursor-pointer group relative overflow-hidden"
               >
                 <div className="flex items-center justify-between mb-4 relative z-10">
                   <div className="flex items-center gap-3">

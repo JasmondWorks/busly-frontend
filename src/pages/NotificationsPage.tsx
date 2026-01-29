@@ -71,7 +71,7 @@ export default function NotificationsPage() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className={`p-5 rounded-[2rem] border transition-all cursor-pointer relative overflow-hidden ${
+              className={`p-5 rounded-2xl border transition-all cursor-pointer relative overflow-hidden ${
                 notif.unread
                   ? 'bg-white border-brand-100 shadow-lg shadow-brand-900/5'
                   : 'bg-white/60 border-gray-100 grayscale-[0.5] opacity-80'
@@ -82,7 +82,7 @@ export default function NotificationsPage() {
               )}
               <div className="flex gap-4">
                 <div
-                  className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${notif.bgColor} ${notif.color}`}
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${notif.bgColor} ${notif.color}`}
                 >
                   <notif.icon size={20} />
                 </div>
@@ -102,7 +102,7 @@ export default function NotificationsPage() {
           ))}
         </div>
 
-        <div className="mt-12 text-center py-10 border-2 border-dashed border-gray-200 rounded-[2.5rem]">
+        <div className="mt-12 text-center py-10 border-2 border-dashed border-gray-200 rounded-3xl">
           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-300">
             <CheckCircle2 size={32} />
           </div>
