@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
-import type { Route, Stop } from '../types';
+import type { NormalisedRoute, NormalisedStop } from '../services/navigation.api';
 import { useMemo } from 'react';
 
 interface GraphViewProps {
-  route: Route;
-  stops: { stop: Stop; sequenceOrder: number }[];
+  route: NormalisedRoute;
+  stops: { stop: NormalisedStop; sequenceOrder: number }[];
 }
 
 export const GraphView = ({ route, stops }: GraphViewProps) => {

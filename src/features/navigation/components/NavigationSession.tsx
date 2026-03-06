@@ -1,14 +1,16 @@
 import { motion } from 'framer-motion';
-import type { Route, Stop } from '../types';
+import type { NormalisedRoute, NormalisedStop } from '../services/navigation.api';
 import { MapPin, ArrowRight } from 'lucide-react';
 
 interface NavigationSessionProps {
-  route: Route;
-  stops: { stop: Stop; sequenceOrder: number }[];
+  route: NormalisedRoute;
+  stops: { stop: NormalisedStop; sequenceOrder: number }[];
   currentStepIndex: number;
 }
 
-export const NavigationSession = ({ route, stops, currentStepIndex }: NavigationSessionProps) => {
+export const NavigationSession = ({ stops, currentStepIndex }: NavigationSessionProps) => {
+  const originName = stops[0]?.stop.name ?? 'Origin';
+  const destinationName = stops[stops.length - 1]?.stop.name ?? 'Destination';
   return (
     <div className="bg-white h-full relative flex flex-col font-sans">
       {/* Header */}
@@ -21,9 +23,9 @@ export const NavigationSession = ({ route, stops, currentStepIndex }: Navigation
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="font-medium text-lg opacity-90">{route.originStop.name}</span>
+          <span className="font-medium text-lg opacity-90">{originName}</span>
           <ArrowRight size={16} className="text-brand-200" />
-          <span className="font-medium text-lg opacity-90">{route.destinationStop.name}</span>
+          <span className="font-medium text-lg opacity-90">{destinationName}</span>
         </div>
       </div>
 
