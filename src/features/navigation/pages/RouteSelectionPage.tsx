@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { navigationApi } from '../services/navigation.api';
-import type { Route } from '../types';
+import type { NormalisedRoute } from '@/lib/api/routes.api';
 import { ArrowLeft, Clock, Zap, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -11,7 +11,7 @@ export const RouteSelectionPage = () => {
   const originId = searchParams.get('originId');
   const destinationId = searchParams.get('destinationId');
 
-  const [routes, setRoutes] = useState<Route[]>([]);
+  const [routes, setRoutes] = useState<NormalisedRoute[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export const RouteSelectionPage = () => {
     fetchRoutes();
   }, [originId, destinationId]);
 
-  const handleSelectRoute = (_: Route) => {
+  const handleSelectRoute = (_: NormalisedRoute) => {
     navigate('/navigation/active'); // Directing to the ActiveMock for demo purposes
   };
 
@@ -122,7 +122,9 @@ export const RouteSelectionPage = () => {
               <div className="flex items-center gap-3 text-sm text-gray-600 pt-2">
                 <div className="flex items-center gap-2 min-w-0">
                   <div className="w-3 h-3 rounded-full border-2 border-gray-400 bg-white shrink-0"></div>
-                  <span className="font-medium truncate">{route.originStop.name}</span>
+                  <span className="font-medium truncate">
+                    {route.originStop?.name ?? 'Unknown'}
+                  </span>
                 </div>
 
                 <div className="h-0.5 bg-gray-200 flex-1 relative mx-2">
@@ -133,7 +135,9 @@ export const RouteSelectionPage = () => {
 
                 <div className="flex items-center gap-2 min-w-0">
                   <div className="w-3 h-3 rounded-full bg-brand-600 shrink-0"></div>
-                  <span className="font-medium truncate">{route.destinationStop.name}</span>
+                  <span className="font-medium truncate">
+                    {route.destinationStop?.name ?? 'Unknown'}
+                  </span>
                 </div>
               </div>
             </motion.div>

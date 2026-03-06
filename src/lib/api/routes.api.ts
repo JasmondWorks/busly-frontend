@@ -1,5 +1,14 @@
 import { api } from '@/lib/axios';
 
+export interface ApiStop {
+  _id: string;
+  name: string;
+  latitude?: number;
+  longitude?: number;
+  description?: string;
+  areaName?: string;
+}
+
 export interface ApiRoute {
   _id: string;
   name: string;
@@ -8,6 +17,8 @@ export interface ApiRoute {
   status?: string;
   reliabilityScore?: number;
   estimatedFare?: number;
+  originStop?: ApiStop;
+  destinationStop?: ApiStop;
   stopsSequence: Array<{
     stop: string;
     order: number;
@@ -24,6 +35,8 @@ export interface NormalisedRoute {
   reliabilityScore: number;
   estimatedFare: number;
   stopCount: number;
+  originStop?: { id: string; name: string };
+  destinationStop?: { id: string; name: string };
 }
 
 function normaliseRoute(r: ApiRoute): NormalisedRoute {
@@ -36,6 +49,10 @@ function normaliseRoute(r: ApiRoute): NormalisedRoute {
     reliabilityScore: r.reliabilityScore ?? 80,
     estimatedFare: r.estimatedFare ?? 0,
     stopCount: r.stopsSequence?.length ?? 0,
+    ...(r.originStop && { originStop: { id: r.originStop._id, name: r.originStop.name } }),
+    ...(r.destinationStop && {
+      destinationStop: { id: r.destinationStop._id, name: r.destinationStop.name },
+    }),
   };
 }
 
