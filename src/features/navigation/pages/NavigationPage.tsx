@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { navigationApi } from '../services/navigation.api';
-import type { Route, Stop } from '../types';
+import type { NormalisedRoute, NormalisedStop } from '../services/navigation.api';
 import { NavigationSession } from '../components/NavigationSession';
 import { GraphView } from '../components/GraphView';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -10,8 +10,8 @@ import { Map, GitGraph, X } from 'lucide-react';
 export const NavigationPage = () => {
   const { routeId } = useParams();
   const navigate = useNavigate();
-  const [route, setRoute] = useState<Route | null>(null);
-  const [stops, setStops] = useState<{ stop: Stop; sequenceOrder: number }[]>([]);
+  const [route, setRoute] = useState<NormalisedRoute | null>(null);
+  const [stops, setStops] = useState<{ stop: NormalisedStop; sequenceOrder: number }[]>([]);
   const [isGraphMode, setIsGraphMode] = useState(false);
   const [loading, setLoading] = useState(true);
 

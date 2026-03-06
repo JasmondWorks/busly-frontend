@@ -37,12 +37,16 @@ export default function ActiveJourneyPage() {
     id: stop.id,
     name: stop.name,
     time: index === currentStopIndex ? 'Now' : '',
-    status: index < currentStopIndex ? 'past' : index === currentStopIndex ? 'current' : 'future',
+    status: (index < currentStopIndex
+      ? 'past'
+      : index === currentStopIndex
+        ? 'current'
+        : 'future') as 'past' | 'current' | 'future',
     landmarks: stop.landmark
       ? [
           {
             id: `lm-${stop.id}`,
-            type: 'system',
+            type: 'system' as const,
             hint: stop.landmark.cue ?? `Near ${stop.landmark.name}`,
             detail: `${stop.landmark.category} · ${stop.landmark.name}`,
             image: null,
@@ -73,7 +77,9 @@ export default function ActiveJourneyPage() {
       <div className="flex-1 flex flex-col max-w-md w-full mx-auto lg:mx-0 lg:h-screen lg:overflow-y-auto bg-white/80 backdrop-blur-xl border-r border-gray-100 z-10 relative shadow-2xl shadow-gray-200/50">
         <NavigationHeader
           nextStop={activeStop?.name ?? 'Destination'}
-          arrivalTime={currentLeg ? Math.round(currentLeg.estimatedDurationSeconds / 60).toString() : '0'}
+          arrivalTime={
+            currentLeg ? Math.round(currentLeg.estimatedDurationSeconds / 60).toString() : '0'
+          }
           isAlighting={isAlighting}
           onMapClick={() => setShowMapModal(true)}
         />
