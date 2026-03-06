@@ -12,7 +12,13 @@ export const SearchPage = () => {
   const navigate = useNavigate();
 
   const handleRouteSelected = (origin: Stop, destination: Stop) => {
-    navigate(`/routes?originId=${origin.id}&destinationId=${destination.id}`);
+    const params = new URLSearchParams({
+      originId: origin.id,
+      destinationId: destination.id,
+      originName: origin.name,
+      destName: destination.name,
+    });
+    navigate(`/results?${params.toString()}`);
   };
 
   const recentSearches = [

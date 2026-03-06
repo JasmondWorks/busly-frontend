@@ -4,6 +4,20 @@ import HomePage from '@/pages/HomePage';
 
 export const router = createBrowserRouter([
   {
+    path: '/login',
+    async lazy() {
+      const { default: LoginPage } = await import('@/pages/auth/LoginPage');
+      return { Component: LoginPage };
+    },
+  },
+  {
+    path: '/register',
+    async lazy() {
+      const { default: RegisterPage } = await import('@/pages/auth/RegisterPage');
+      return { Component: RegisterPage };
+    },
+  },
+  {
     path: '/',
     element: <ResponsiveLayout />,
     children: [
@@ -35,6 +49,13 @@ export const router = createBrowserRouter([
         async lazy() {
           const { default: RoutesPage } = await import('@/pages/RoutesPage');
           return { Component: RoutesPage };
+        },
+      },
+      {
+        path: 'results',
+        async lazy() {
+          const { default: RouteResultsPage } = await import('@/pages/RouteResultsPage');
+          return { Component: RouteResultsPage };
         },
       },
       {

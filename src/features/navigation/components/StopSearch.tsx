@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { MapPin, ArrowRight, Navigation } from 'lucide-react';
-import { navigationApi } from '../services/navigation.api';
+import { MapPin, ArrowRight, Navigation, Loader2 } from 'lucide-react';
 import type { Stop } from '../types';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -13,6 +12,9 @@ import {
   CommandList,
 } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { useSearchStops } from '@/hooks/useStops';
+import { useDebounce } from '@/hooks/useDebounce';
+import { stopsApi } from '@/lib/api/stops.api';
 
 interface StopSearchProps {
   onRouteSelected: (origin: Stop, destination: Stop) => void;
@@ -21,9 +23,7 @@ interface StopSearchProps {
 interface StopPickerProps {
   label: string;
   selected: Stop | null;
-  onSelect: (stop: Stop | null) => void;
-  results: Stop[];
-  onSearch: (val: string) => void;
+  onSelect: (stop: Stop) => void;
   open: boolean;
   setOpen: (val: boolean) => void;
   placeholder: string;
@@ -31,42 +31,40 @@ interface StopPickerProps {
   enableCurrentLocation?: boolean;
 }
 
-const StopPicker = ({
+function StopPicker({
   label,
   selected,
   onSelect,
-  results,
-  onSearch,
   open,
   setOpen,
   placeholder,
   icon,
   enableCurrentLocation,
-}: StopPickerProps) => {
-  const [loadingLocation, setLoadingLocation] = useState(false);
+}: StopPickerProps) {
+  const [query, setQuery] = useState('');
+  const [locating, setLocating] = useState(false);
+  const debouncedQuery = useDebounce(query, 300);
+
+  const { data: results = [], isLoading } = useSearchStops(debouncedQuery);
 
   const handleUseCurrentLocation = () => {
-    setLoadingLocation(true);
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const { latitude, longitude } = position.coords;
-          try {
-            const nearest = await navigationApi.findNearestStop(latitude, longitude);
-            onSelect(nearest); // We call onSelect directly
+    if (!navigator.geolocation) return;
+    setLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      async ({ coords }) => {
+        try {
+          const nearby = await stopsApi.nearby(coords.latitude, coords.longitude, 2000);
+          if (nearby.length > 0) {
+            onSelect(nearby[0] as Stop);
             setOpen(false);
-          } catch (e) {
-            console.error(e);
-          } finally {
-            setLoadingLocation(false);
           }
-        },
-        (err) => {
-          console.error(err);
-          setLoadingLocation(false);
-        },
-      );
-    }
+        } finally {
+          setLocating(false);
+        }
+      },
+      () => setLocating(false),
+      { timeout: 10_000 },
+    );
   };
 
   return (
@@ -97,17 +95,31 @@ const StopPicker = ({
           align="start"
         >
           <Command shouldFilter={false}>
-            <CommandInput placeholder={placeholder} onValueChange={onSearch} />
+            <CommandInput
+              placeholder={placeholder}
+              value={query}
+              onValueChange={setQuery}
+            />
             <CommandList>
-              <CommandEmpty>No stop found.</CommandEmpty>
+              {isLoading ? (
+                <div className="flex items-center justify-center py-4 text-gray-400 text-sm gap-2">
+                  <Loader2 className="w-4 h-4 animate-spin" /> Searching…
+                </div>
+              ) : (
+                <CommandEmpty>No stops found.</CommandEmpty>
+              )}
               <CommandGroup>
                 {enableCurrentLocation && (
                   <CommandItem
                     onSelect={handleUseCurrentLocation}
                     className="cursor-pointer text-brand-600 font-medium"
                   >
-                    <Navigation className="mr-2 h-4 w-4" />
-                    {loadingLocation ? 'Locating...' : 'Use Current Location'}
+                    {locating ? (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    ) : (
+                      <Navigation className="mr-2 h-4 w-4" />
+                    )}
+                    {locating ? 'Locating…' : 'Use Current Location'}
                   </CommandItem>
                 )}
                 {results.map((stop) => (
@@ -115,18 +127,16 @@ const StopPicker = ({
                     key={stop.id}
                     value={stop.name}
                     onSelect={() => {
-                      onSelect(stop);
+                      onSelect(stop as Stop);
                       setOpen(false);
                     }}
                     className="cursor-pointer"
                   >
-                    <MapPin className="mr-2 h-4 w-4 text-gray-400" />
+                    <MapPin className="mr-2 h-4 w-4 text-gray-400 shrink-0" />
                     <div className="flex flex-col">
-                      <span>{stop.name}</span>
-                      {stop.description && (
-                        <span className="text-xs text-gray-400 text-muted-foreground">
-                          {stop.description}
-                        </span>
+                      <span className="font-medium">{stop.name}</span>
+                      {stop.areaName && (
+                        <span className="text-xs text-gray-400">{stop.areaName}</span>
                       )}
                     </div>
                   </CommandItem>
@@ -138,33 +148,13 @@ const StopPicker = ({
       </Popover>
     </div>
   );
-};
+}
 
 export const StopSearch = ({ onRouteSelected }: StopSearchProps) => {
-  const [originResults, setOriginResults] = useState<Stop[]>([]);
-  const [destResults, setDestResults] = useState<Stop[]>([]);
-
   const [selectedOrigin, setSelectedOrigin] = useState<Stop | null>(null);
   const [selectedDest, setSelectedDest] = useState<Stop | null>(null);
-
   const [originOpen, setOriginOpen] = useState(false);
   const [destOpen, setDestOpen] = useState(false);
-
-  // Generic search handler
-  const handleSearch = async (query: string, setResults: (stops: Stop[]) => void) => {
-    if (query.length < 2) {
-      setResults([]);
-      return;
-    }
-    try {
-      const results = await navigationApi.searchStops(query);
-      setResults(results);
-      console.log(results);
-    } catch (error) {
-      console.error(error);
-      setResults([]);
-    }
-  };
 
   const handleFindRoute = () => {
     if (selectedOrigin && selectedDest) {
@@ -174,7 +164,6 @@ export const StopSearch = ({ onRouteSelected }: StopSearchProps) => {
 
   return (
     <div className="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-brand-900/5 p-8 md:p-10 w-full relative overflow-hidden">
-      {/* Decorative Blobs */}
       <div className="absolute -top-24 -right-24 w-48 h-48 bg-brand-50 rounded-full blur-3xl opacity-50 z-0"></div>
       <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-blue-50 rounded-full blur-3xl opacity-50 z-0"></div>
 
@@ -188,34 +177,25 @@ export const StopSearch = ({ onRouteSelected }: StopSearchProps) => {
         </p>
 
         <div className="relative">
-          {/* Connector Line */}
           <div className="absolute left-[20px] top-[45px] bottom-[45px] w-px bg-gray-200 hidden sm:block z-0"></div>
-
           <div className="relative z-10">
             <StopPicker
               label="Origin"
               selected={selectedOrigin}
               onSelect={setSelectedOrigin}
-              results={originResults}
-              onSearch={(val) => handleSearch(val, setOriginResults)}
               open={originOpen}
               setOpen={setOriginOpen}
-              placeholder="Search origin stop..."
-              icon={
-                <div className="w-2.5 h-2.5 rounded-full border-2 border-gray-400 bg-white"></div>
-              }
-              enableCurrentLocation={true}
+              placeholder="Search origin stop…"
+              icon={<div className="w-2.5 h-2.5 rounded-full border-2 border-gray-400 bg-white" />}
+              enableCurrentLocation
             />
-
             <StopPicker
               label="Destination"
               selected={selectedDest}
               onSelect={setSelectedDest}
-              results={destResults}
-              onSearch={(val) => handleSearch(val, setDestResults)}
               open={destOpen}
               setOpen={setDestOpen}
-              placeholder="Search destination stop..."
+              placeholder="Search destination stop…"
               icon={<MapPin size={16} className="text-brand-600" />}
             />
           </div>
